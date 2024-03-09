@@ -12,10 +12,17 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_categoryFragment"
-            app:destination="@id/categoryFragment" />
+            app:destination="@id/categoryFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_homeFragment_to_profileActivity"
-            app:destination="@id/profileActivity" />
+            app:destination="@id/profileActivity"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"/>
     </fragment>
 
     <fragment
@@ -36,14 +43,20 @@
         android:id="@+id/detailCategoryFragment"
         android:name="com.jimbonlemu.chicken_man.DetailCategoryFragment"
         android:label="fragment_detail_category"
-        tools:layout="@layout/fragment_detail_category" >
+        tools:layout="@layout/fragment_detail_category">
         <argument
-            android:name="name"
-            app:argType="string"
-            android:defaultValue="default name" />
+            app:name="name"
+            android:defaultValue="default name"
+            app:argType="string" />
         <argument
-            android:name="stock"
-            app:argType="long"
-            android:defaultValue="0L" />
+            app:name="stock"
+            android:defaultValue="0L"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_detailCategoryFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
