@@ -11,7 +11,7 @@ import com.jimbonlemu.chicken_man.databinding.FragmentDetailCategoryBinding
 
 class DetailCategoryFragment : Fragment() {
 
-    private var _binding : FragmentDetailCategoryBinding? = null
+    private var _binding: FragmentDetailCategoryBinding? = null
     private val binding get() = _binding!!
 
 
@@ -19,7 +19,7 @@ class DetailCategoryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDetailCategoryBinding.inflate(inflater, container,false )
+        _binding = FragmentDetailCategoryBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -27,8 +27,10 @@ class DetailCategoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tvCategoryName.text =  arguments?.getString(CategoryFragment.ARGS_NAME)
-        binding.tvCategoryDescription.text = "Stock : ${arguments?.getLong(CategoryFragment.ARGS_STOCK)}"
+        val dataName = DetailCategoryFragmentArgs.fromBundle(arguments as Bundle).name
+        val dataDescription = DetailCategoryFragmentArgs.fromBundle(arguments as Bundle).stock
+        binding.tvCategoryName.text = dataName
+        binding.tvCategoryDescription.text = "Stock :  $dataDescription"
     }
 
     override fun onDestroy() {
