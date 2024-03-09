@@ -5,43 +5,44 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import androidx.navigation.findNavController
+import com.jimbonlemu.chicken_man.databinding.FragmentCategoryBinding
 
 
-class CategoryFragment : Fragment(), View.OnClickListener {
+class CategoryFragment : Fragment() {
 
+    private var _binding: FragmentCategoryBinding? = null
+    private val binding get() = _binding!!
+
+    companion object {
+        val ARGS_NAME = "args_name"
+        val ARGS_STOCK = "args_stock"
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        _binding = FragmentCategoryBinding.inflate(inflater, container, false)
 
-        return inflater.inflate(R.layout.fragment_category, container, false)
+        return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<Button>(R.id.btn_detail_category).setOnClickListener(this)
+
+        binding.btnCategoryLifestyle.setOnClickListener {
+           val toDetailCategoryFragment = CategoryFragmentDirections.actionCategoryFragmentToDetailCategoryFragment()
+            toDetailCategoryFragment.name = "Lifestyle"
+            toDetailCategoryFragment.stock = 7
+            view.findNavController().navigate(toDetailCategoryFragment)
+        }
     }
 
-    override fun onClick(view: View?) {
-        if (view?.id == R.id.btn_detail_category) {
-            val detailCategoryFragment = DetailCategoryFragment()
-
-            val bundle = Bundle()
-            bundle.putString(DetailCategoryFragment.ARGS_NAME, "Lifestyle")
-            val description = "Kategori ini akan berisi produk-produk lifestyle"
-
-            detailCategoryFragment.arguments = bundle
-            detailCategoryFragment.description = description
-
-            val fragmentManager = parentFragmentManager
-            fragmentManager.beginTransaction().apply {
-                replace(R.id.frame_container, detailCategoryFragment, DetailCategoryFragment::class.java.simpleName)
-                addToBackStack(null)
-                commit()
-            }
-        }
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 

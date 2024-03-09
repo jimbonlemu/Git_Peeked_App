@@ -11,16 +11,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val fragmentManager = supportFragmentManager
-        val fragment = fragmentManager.findFragmentByTag(HomeFragment::class.java.simpleName)
-
-
-        if ( fragment !is HomeFragment ) {
-            Log.d("Chicken Man", "Fragment Name :" + HomeFragment::class.java.simpleName)
-
-            fragmentManager.beginTransaction()
-                .add(R.id.frame_container, HomeFragment(), HomeFragment::class.java.simpleName)
-                .commit()
-        }
     }
 }
