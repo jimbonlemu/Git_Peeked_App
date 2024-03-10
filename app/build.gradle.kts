@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.jimbonlemu.fundamental_android_bangkit_dicoding"
+    namespace = "com.jimbonlemu.fundamental_android"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.jimbonlemu.fundamental_android_bangkit_dicoding"
+        applicationId = "com.jimbonlemu.fundamental_android"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

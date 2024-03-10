@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Fundamental_Android_Bangkit_Dicoding"
+rootProject.name = "Fundamental_Android"
 include(":app")
  
