@@ -1,4 +1,4 @@
-package com.jimbonlemu.chicken_man
+package com.jimbonlemu.fundamental_android_bangkit_dicoding
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.jimbonlemu.chicken_man", appContext.packageName)
+        assertEquals("com.jimbonlemu.fundamental_android_bangkit_dicoding", appContext.packageName)
     }
 }

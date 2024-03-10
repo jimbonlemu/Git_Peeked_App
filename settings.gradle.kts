@@ -13,5 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Chicken Man"
+rootProject.name = "Fundamental_Android_Bangkit_Dicoding"
 include(":app")
+ 

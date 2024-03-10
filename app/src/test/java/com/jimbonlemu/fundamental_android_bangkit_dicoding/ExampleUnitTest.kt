@@ -1,4 +1,4 @@
-package com.jimbonlemu.chicken_man
+package com.jimbonlemu.fundamental_android_bangkit_dicoding
 
 import org.junit.Test
 
