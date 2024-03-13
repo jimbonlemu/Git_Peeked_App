@@ -1,4 +1,5 @@
 package com.jimbonlemu.fundamental_android.ui
+
 import ApiConfig
 import CustomerReviewsItem
 import PostReviewResponse
@@ -15,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.jimbonlemu.fundamental_android.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,8 +39,11 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        val mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
-        mainViewModel.restaurant.observe(this){restaurant ->
+        val mainViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        ).get(MainViewModel::class.java)
+        mainViewModel.restaurant.observe(this) { restaurant ->
             setRestaurantData(restaurant)
 
         }
@@ -47,15 +52,19 @@ class MainActivity : AppCompatActivity() {
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
         binding.rvReview.addItemDecoration(itemDecoration)
 
-        mainViewModel.listReview.observe(this){costumerReviews->
+        mainViewModel.listReview.observe(this) { costumerReviews ->
             setReviewData(costumerReviews)
         }
 
-        mainViewModel.isLoading.observe(this){
+        mainViewModel.isLoading.observe(this) {
             showLoading(it)
         }
 
-
+        mainViewModel.snackBarText.observe(this) {
+            it.getContentIfNotHandled()?.let { snackBarText ->
+                Snackbar.make(window.decorView.rootView, snackBarText, Snackbar.LENGTH_SHORT).show()
+            }
+        }
 
         binding.btnSend.setOnClickListener { view ->
             mainViewModel.postReview(binding.edReview.text.toString())
@@ -64,8 +73,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
     private fun setRestaurantData(restaurant: Restaurant) {
         binding.tvTitle.text = restaurant.name
         binding.tvDescription.text = restaurant.description
@@ -73,7 +80,6 @@ class MainActivity : AppCompatActivity() {
             .load("https://restaurant-api.dicoding.dev/images/large/${restaurant.pictureId}")
             .into(binding.ivPicture)
     }
-
 
 
     private fun setReviewData(consumerReviews: List<CustomerReviewsItem>) {

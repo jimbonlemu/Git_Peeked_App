@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.jimbonlemu.fundamental_android.util.Event
 import okhttp3.internal.EMPTY_RESPONSE
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,6 +24,8 @@ class MainViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    private val _snackBarText = MutableLiveData<Event<String>>()
+    val snackBarText:LiveData<Event<String>> = _snackBarText
 
     companion object {
         private const val TAG = "MainViewModel"
@@ -68,6 +71,7 @@ class MainViewModel : ViewModel() {
                 _isLoading.value = false
                 if (response.isSuccessful) {
                     _listReview.value = response.body()?.customerReviews
+                    _snackBarText.value = Event(response.body()?.message.toString())
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
