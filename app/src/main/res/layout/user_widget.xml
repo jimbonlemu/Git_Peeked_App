@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="18dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civUserImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tvUserGithubName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/civUserImage"
+        app:layout_constraintTop_toTopOf="@+id/civUserImage"
+        tools:text="@tools:sample/full_names" />
+
+
+    <TextView
+        android:id="@+id/comp_header_followers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="@string/followers"
+        android:textStyle="bold"
+        android:layout_marginStart="18dp"
+        app:layout_constraintStart_toEndOf="@+id/civUserImage"
+        app:layout_constraintTop_toBottomOf="@+id/tvUserGithubName" />
+
+    <TextView
+        android:id="@+id/tvGithubUserFollowers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/comp_header_followers"
+        app:layout_constraintStart_toStartOf="@+id/comp_header_followers"
+        app:layout_constraintTop_toBottomOf="@+id/comp_header_followers"
+        tools:text="@tools:sample/us_zipcodes" />
+
+    <TextView
+        android:id="@+id/comp_header_followings"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="@string/following"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/comp_header_followers"
+        app:layout_constraintTop_toTopOf="@+id/comp_header_followers" />
+
+    <TextView
+        android:id="@+id/tvGithubUserFollowing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/comp_header_followings"
+        app:layout_constraintStart_toStartOf="@+id/comp_header_followings"
+        app:layout_constraintTop_toBottomOf="@+id/comp_header_followings"
+        tools:text="@tools:sample/us_zipcodes" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
