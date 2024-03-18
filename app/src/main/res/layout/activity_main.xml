@@ -27,6 +27,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_loader"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchBar"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:ignore="UselessLeaf">
+
+            <include layout="@layout/user_widget_shimmer" />
+
+            <include layout="@layout/user_widget_shimmer" />
+
+            <include layout="@layout/user_widget_shimmer" />
+
+            <include layout="@layout/user_widget_shimmer" />
+
+            <include layout="@layout/user_widget_shimmer" />
+
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvGithubUser"
@@ -34,8 +63,10 @@
         android:layout_height="0dp"
         android:layout_marginTop="18dp"
         android:layout_marginBottom="18dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchBar" />
+        app:layout_constraintTop_toBottomOf="@+id/searchBar"
+        tools:visibility="visible" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.jimbonlemu.fundamental_android.adapter
+package com.jimbonlemu.fundamental_android.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
