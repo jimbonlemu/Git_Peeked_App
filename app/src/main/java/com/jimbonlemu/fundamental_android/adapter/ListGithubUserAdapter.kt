@@ -1,19 +1,13 @@
 package com.jimbonlemu.fundamental_android.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.jimbonlemu.fundamental_android.data.api.ApiConfig
-import com.jimbonlemu.fundamental_android.data.models.UserItem
+import com.jimbonlemu.fundamental_android.data.response.UserItem
 import com.jimbonlemu.fundamental_android.databinding.UserWidgetBinding
-import org.json.JSONArray
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class ListGithubUserAdapter :
@@ -24,6 +18,7 @@ class ListGithubUserAdapter :
             Glide.with(binding.root).load(userItem.avatarUrl).into(binding.civUserImage)
             binding.tvUserGithubName.text = userItem.login
             binding.tvGithubUserFollowers.text = userItem.followersCount.toString()
+            binding.tvGithubUserFollowing.text = userItem.followingCount.toString()
         }
 
     }

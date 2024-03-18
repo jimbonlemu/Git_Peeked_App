@@ -1,4 +1,4 @@
-package com.jimbonlemu.fundamental_android.data.models
+package com.jimbonlemu.fundamental_android.data.response
 
 import com.google.gson.annotations.SerializedName
 

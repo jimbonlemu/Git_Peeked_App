@@ -1,4 +1,4 @@
-package com.jimbonlemu.fundamental_android.data.models
+package com.jimbonlemu.fundamental_android.data.response
 
 import com.google.gson.annotations.SerializedName
 
@@ -73,7 +73,7 @@ data class UserItem(
     @field:SerializedName("organizations_url")
     val organizationsUrl: String? = null,
 
-    var followersCount: Int? = null,
+    var followersCount: Int? = null ?: 0,
 
-    var followingCount: Int? = null,
+    var followingCount: Int? = null ?: 0,
 )

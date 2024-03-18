@@ -1,15 +1,14 @@
-package com.jimbonlemu.fundamental_android.pages
+package com.jimbonlemu.fundamental_android.view.pages
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jimbonlemu.fundamental_android.adapter.ListGithubUserAdapter
 import com.jimbonlemu.fundamental_android.data.api.ApiConfig
-import com.jimbonlemu.fundamental_android.data.models.SearchResponse
-import com.jimbonlemu.fundamental_android.data.models.UserItem
+import com.jimbonlemu.fundamental_android.data.response.SearchResponse
+import com.jimbonlemu.fundamental_android.data.response.UserItem
 import com.jimbonlemu.fundamental_android.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Response
@@ -30,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                 layoutManager.orientation
             )
         )
-
+        getUser("jimbon")
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
             searchView.editText.setOnEditorActionListener { textView, i, keyEvent ->
@@ -64,7 +63,9 @@ class MainActivity : AppCompatActivity() {
                 Log.e("MainActivity", "onFailure: ${t.message}")
             }
         })
+
     }
+
 
 
     private fun setUser(userItem: List<UserItem?>?) {

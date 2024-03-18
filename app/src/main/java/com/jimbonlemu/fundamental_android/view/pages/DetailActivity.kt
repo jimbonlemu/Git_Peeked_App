@@ -1,4 +1,4 @@
-package com.jimbonlemu.fundamental_android.pages
+package com.jimbonlemu.fundamental_android.view.pages
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
