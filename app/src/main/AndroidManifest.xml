@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Fundamental_Android"
         tools:targetApi="31">
         <activity
+            android:name=".view.fragment_pages.MianActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.pages.DetailActivity"
             android:exported="false" />
         <activity

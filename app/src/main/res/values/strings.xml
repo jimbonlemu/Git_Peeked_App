@@ -3,4 +3,11 @@
     <string name="search_for_git_users">Search for Git users</string>
     <string name="following">Following</string>
     <string name="followers">Followers</string>
+    <string name="total_repos">Total Repos :</string>
+    <string name="company">Company :</string>
+    <string name="location">Location :</string>
+    <string name="bio_about_me">Bio about </string>
+    <string name="text_sample">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quam viverra orci sagittis eu volutpat odio facilisis mauris sit. Quis varius quam quisque id diam vel. Semper auctor neque vitae tempus quam. Phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

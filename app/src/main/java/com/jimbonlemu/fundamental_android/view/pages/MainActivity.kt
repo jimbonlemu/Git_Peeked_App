@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.jimbonlemu.fundamental_android.data.response.UserItem
 import com.jimbonlemu.fundamental_android.databinding.ActivityMainBinding
 import com.jimbonlemu.fundamental_android.view.adapter.ListGithubUserAdapter
-import com.jimbonlemu.fundamental_android.view.viewmodel.MainViewModel
+import com.jimbonlemu.fundamental_android.view.view_model.MainViewModel
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
                 setListGithubUserData(listData)
             }
         }
+
         mainViewModel.isLoading.observe(this) {
             showLoader(it)
         }

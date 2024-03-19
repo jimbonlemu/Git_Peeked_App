@@ -1,5 +1,7 @@
 package com.jimbonlemu.fundamental_android.view.adapter
 
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.jimbonlemu.fundamental_android.data.response.UserItem
 import com.jimbonlemu.fundamental_android.databinding.UserWidgetBinding
+import com.jimbonlemu.fundamental_android.view.pages.DetailActivity
 
 
 class ListGithubUserAdapter :
@@ -17,8 +20,13 @@ class ListGithubUserAdapter :
         fun bind(userItem: UserItem) {
             Glide.with(binding.root).load(userItem.avatarUrl).into(binding.civUserImage)
             binding.tvUserGithubName.text = userItem.login
-            binding.tvGithubUserFollowers.text = userItem.followersCount.toString()
-            binding.tvGithubUserFollowing.text = userItem.followingCount.toString()
+
+            val args = Bundle()
+            args.putString("username", userItem.login)
+
+            binding.root.setOnClickListener {
+                it.context.startActivity(Intent(it.context, DetailActivity::class.java).putExtras(args))
+            }
         }
 
     }
@@ -36,7 +44,6 @@ class ListGithubUserAdapter :
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val gitUser = getItem(position)
         holder.bind(gitUser)
-
     }
 
     companion object {
@@ -48,5 +55,4 @@ class ListGithubUserAdapter :
                 oldItem == newItem
         }
     }
-
 }

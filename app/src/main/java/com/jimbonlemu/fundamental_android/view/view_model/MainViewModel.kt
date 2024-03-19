@@ -1,4 +1,4 @@
-package com.jimbonlemu.fundamental_android.view.viewmodel
+package com.jimbonlemu.fundamental_android.view.view_model
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -40,17 +40,15 @@ class MainViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     _searchResult.value = response.body()?.items
                 } else {
-                    Log.e("MainActivity", "onFailure: ${response.message()}")
+                    Log.e("MainViewModel", "onFailure: ${response.message()}")
                 }
             }
 
             override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
                 _isLoading.value = false
-                Log.e("MainActivity", "onFailure: ${t.message}")
+                Log.e("MainViewModel", "onFailure: ${t.message}")
             }
         })
-
-
     }
 
 

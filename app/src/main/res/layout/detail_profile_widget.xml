@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="18dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civDetailUserImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tvDetailName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/civDetailUserImage"
+        app:layout_constraintTop_toTopOf="@+id/civDetailUserImage"
+        tools:text="@tools:sample/full_names" />
+
+
+    <TextView
+        android:id="@+id/tvDetailUsername"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvDetailName"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailName"
+        tools:text="@tools:sample/first_names" />
+
+
+    <TextView
+        android:id="@+id/comp_title_bio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/bio_about_me"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/civDetailUserImage" />
+
+    <TextView
+        android:id="@+id/tvDetailBio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/comp_title_bio"
+        tools:text="@string/text_sample" />
+
+
+    <ImageView
+        android:id="@+id/icon_comp_location"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/icon_location"
+        app:layout_constraintStart_toStartOf="@+id/tvDetailBio"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailBio"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/comp_title_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/location"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/icon_comp_location"
+        app:layout_constraintStart_toEndOf="@+id/icon_comp_location"
+        app:layout_constraintTop_toTopOf="@+id/icon_comp_location" />
+
+
+    <TextView
+        android:id="@+id/tvDetailLocation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/comp_title_location"
+        app:layout_constraintTop_toTopOf="@+id/comp_title_location"
+        tools:text="@tools:sample/lorem" />
+
+    <ImageView
+        android:id="@+id/icon_comp_companies"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/icon_company"
+        app:layout_constraintStart_toStartOf="@+id/icon_comp_location"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailLocation"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/comp_title_companies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/company"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/icon_comp_companies"
+        app:layout_constraintStart_toEndOf="@+id/icon_comp_companies"
+        app:layout_constraintTop_toTopOf="@+id/icon_comp_companies" />
+
+
+    <TextView
+        android:id="@+id/tvDetailCompanies"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/comp_title_companies"
+        app:layout_constraintTop_toTopOf="@+id/comp_title_companies"
+        tools:text="@tools:sample/cities" />
+
+    <ImageView
+        android:id="@+id/icon_comp_repos"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+       android:layout_marginTop="8dp"
+        android:src="@drawable/icon_repo"
+        app:layout_constraintStart_toStartOf="@+id/icon_comp_companies"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailCompanies"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/comp_title_total_repos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/total_repos"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/icon_comp_repos"
+        app:layout_constraintStart_toEndOf="@+id/icon_comp_repos"
+        app:layout_constraintTop_toTopOf="@+id/icon_comp_repos" />
+
+
+    <TextView
+        android:id="@+id/tvDetailRepos"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/comp_title_total_repos"
+        app:layout_constraintTop_toTopOf="@+id/comp_title_total_repos"
+        tools:text="@tools:sample/us_zipcodes" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
