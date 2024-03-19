@@ -64,12 +64,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun showLoader(isLoading: Boolean) {
         if (isLoading) {
-            binding.shimmerLoader.startShimmer()
-            binding.shimmerLoader.visibility = View.VISIBLE
+            binding.mainShimmerLoader.startShimmer()
+            binding.mainShimmerLoader.visibility = View.VISIBLE
             binding.rvGithubUser.visibility = View.INVISIBLE
         } else {
-            binding.shimmerLoader.stopShimmer()
-            binding.shimmerLoader.visibility = View.GONE
+            binding.mainShimmerLoader.stopShimmer()
+            binding.mainShimmerLoader.visibility = View.GONE
             binding.rvGithubUser.visibility = View.VISIBLE
         }
     }

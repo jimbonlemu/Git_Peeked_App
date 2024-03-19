@@ -2,6 +2,7 @@ package com.jimbonlemu.fundamental_android.view.pages
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
@@ -32,13 +33,14 @@ class DetailActivity : AppCompatActivity() {
 
         detailViewModel.getDataDetailUserGithub(getExtra)
 
+        detailViewModel.isLoading.observe(this) {
+            setupLoading(it)
+        }
+
         detailViewModel.userDataDetail.observe(this) { value ->
             setUserDataDetail(value)
         }
-
-
     }
-
     private fun setUserDataDetail(data: DetailSearchResponse) {
         with(binding.layoutProfile) {
             Glide.with(root.context).load(data.avatarUrl).into(civDetailUserImage)
@@ -65,11 +67,22 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.hide()
     }
 
+    private fun setupLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.detailProfileShimmerLoader.startShimmer()
+            binding.detailProfileShimmerLoader.visibility = View.VISIBLE
+            binding.layoutProfile.layoutProfileItem.visibility = View.INVISIBLE
+        } else {
+            binding.detailProfileShimmerLoader.stopShimmer()
+            binding.detailProfileShimmerLoader.visibility = View.GONE
+            binding.layoutProfile.layoutProfileItem.visibility = View.VISIBLE
+        }
+    }
+
     companion object {
         private val TAB_TITLES = arrayOf(
             "Following",
             "Followed"
         )
     }
-
 }

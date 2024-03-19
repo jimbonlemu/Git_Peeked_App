@@ -11,7 +11,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="18dp"
-        android:background="@color/shimmerColor"
+        android:background="@drawable/rounded_shimmer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -29,9 +29,6 @@
         app:layout_constraintStart_toEndOf="@+id/civUserImage"
         app:layout_constraintTop_toTopOf="@+id/civUserImage"
         tools:text="@tools:sample/full_names" />
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
