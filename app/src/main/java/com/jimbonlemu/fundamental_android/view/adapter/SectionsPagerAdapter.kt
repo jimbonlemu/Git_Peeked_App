@@ -12,7 +12,7 @@ class SectionsPagerAdapter(
 ) :
     FragmentStateAdapter(activity) {
 
-    var username: String = githubUsername
+    private var username: String = githubUsername
 
     override fun getItemCount(): Int = 2
     override fun createFragment(position: Int): Fragment {

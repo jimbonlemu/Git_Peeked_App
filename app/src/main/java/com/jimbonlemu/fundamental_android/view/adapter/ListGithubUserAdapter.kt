@@ -15,7 +15,7 @@ import com.jimbonlemu.fundamental_android.view.pages.DetailActivity
 class ListGithubUserAdapter :
     ListAdapter<UserItem, ListGithubUserAdapter.ListViewHolder>(DIFF_CALLBACK) {
 
-    class ListViewHolder(val binding: UserWidgetBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ListViewHolder(private val binding: UserWidgetBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(userItem: UserItem) {
             with(binding) {
                 val args = Bundle()
