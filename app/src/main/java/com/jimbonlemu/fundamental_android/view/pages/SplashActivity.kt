@@ -27,7 +27,10 @@ class SplashActivity : AppCompatActivity() {
         Handler().postDelayed({
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             finish()
-        }, 3000)
+        }, SPLASH_SCREEN_DURATION)
+    }
 
+    companion object{
+        const val SPLASH_SCREEN_DURATION = 3000L
     }
 }
