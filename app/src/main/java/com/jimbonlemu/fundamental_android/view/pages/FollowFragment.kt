@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.jimbonlemu.fundamental_android.databinding.FragmentFollowBinding
 import com.jimbonlemu.fundamental_android.view.adapter.ListGithubUserAdapter
 import com.jimbonlemu.fundamental_android.view.view_model.FollowersViewModel
@@ -59,10 +60,23 @@ class FollowFragment : Fragment() {
             if (followingData.value == null) {
                 getFollowingGithubUser(_username!!)
             }
+
+            spawnSnackBar.observe(requireActivity()) {
+                it.getContentIfUnhandled()?.let { textOnSnackBar ->
+                    Snackbar.make(binding?.root?.rootView!!, textOnSnackBar, Snackbar.LENGTH_SHORT)
+                        .show()
+                }
+            }
+
+            isError.observe(viewLifecycleOwner) {
+                binding?.tvFollowError?.text = it
+            }
+
             followingData.observe(viewLifecycleOwner) {
                 adapter.submitList(it)
                 binding?.rvFollow?.adapter = adapter
             }
+
             isLoading.observe(viewLifecycleOwner) {
                 initLoader(it)
             }
@@ -74,10 +88,23 @@ class FollowFragment : Fragment() {
             if (followersData.value == null) {
                 getFollowersGithubUser(_username!!)
             }
+
+            isError.observe(viewLifecycleOwner) {
+                binding?.tvFollowError?.text = it
+            }
+
+            spawnSnackBar.observe(requireActivity()) {
+                it.getContentIfUnhandled()?.let { textOnSnackBar ->
+                    Snackbar.make(binding?.root?.rootView!!, textOnSnackBar, Snackbar.LENGTH_SHORT)
+                        .show()
+                }
+            }
+
             followersData.observe(viewLifecycleOwner) {
                 adapter.submitList(it)
                 binding?.rvFollow?.adapter = adapter
             }
+
             isLoading.observe(viewLifecycleOwner) {
                 initLoader(it)
             }

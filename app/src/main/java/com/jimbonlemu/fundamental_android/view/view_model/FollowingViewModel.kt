@@ -22,8 +22,12 @@ class FollowingViewModel : ViewModel() {
     private val _spawnSnackBar = MutableLiveData<Event<String>>()
     val spawnSnackBar: LiveData<Event<String>> = _spawnSnackBar
 
+    private val _isError = MutableLiveData<String>()
+    val isError: LiveData<String> = _isError
+
 
     fun getFollowingGithubUser(username: String) {
+        _isError.value = ""
         _isLoading.value = true
         val client = ApiConfig.connectApiService().getFollowing(username)
         client.enqueue(object : Callback<List<UserItem>?> {
@@ -34,14 +38,20 @@ class FollowingViewModel : ViewModel() {
                 _isLoading.value = false
                 if (response.isSuccessful) {
                     _followingData.value = response.body()
+                    _isError.value =
+                        if (_followingData.value!!.isEmpty() || _followingData.value!!.equals(0)) "This user has no Following" else ""
+
                 } else {
                     Log.e("Followers View Model", "onFailure: ${response.message()}")
+                    _spawnSnackBar.value = Event(response.message())
+                    _isError.value = "Unable to fetch Following data"
                 }
             }
 
             override fun onFailure(call: Call<List<UserItem>?>, t: Throwable) {
                 _isLoading.value = false
                 Log.e("DetailViewModel", "onFailure: ${t.message}")
+                _spawnSnackBar.value = Event(t.message.toString())
             }
 
         })

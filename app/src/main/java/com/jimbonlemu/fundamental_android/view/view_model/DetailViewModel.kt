@@ -14,34 +14,37 @@ import retrofit2.Response
 class DetailViewModel : ViewModel() {
 
     private val _userDataDetail = MutableLiveData<DetailSearchResponse>()
-    val userDataDetail:LiveData<DetailSearchResponse> = _userDataDetail
+    val userDataDetail: LiveData<DetailSearchResponse> = _userDataDetail
 
     private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading : LiveData<Boolean> = _isLoading
+    val isLoading: LiveData<Boolean> = _isLoading
 
     private val _spawnSnackBar = MutableLiveData<Event<String>>()
-    val spawnSnackBar:LiveData<Event<String>> = _spawnSnackBar
+    val spawnSnackBar: LiveData<Event<String>> = _spawnSnackBar
 
+    fun getDataDetailUserGithub(username: String? = null) {
 
-    fun getDataDetailUserGithub(username:String? = null){
         _isLoading.value = true
         val client = ApiConfig.connectApiService().getDetailGithubUser(username!!)
-        client.enqueue(object :Callback<DetailSearchResponse>{
+        client.enqueue(object : Callback<DetailSearchResponse> {
             override fun onResponse(
                 call: Call<DetailSearchResponse>,
                 response: Response<DetailSearchResponse>
             ) {
                 _isLoading.value = false
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     _userDataDetail.value = response.body()
-                }else{
+                } else {
                     Log.e("DetailViewModel", "onFailure: ${response.message()}")
+                    _spawnSnackBar.value = Event(response.message())
+
                 }
             }
 
             override fun onFailure(call: Call<DetailSearchResponse>, t: Throwable) {
                 _isLoading.value = false
                 Log.e("DetailViewModel", "onFailure: ${t.message}")
+                _spawnSnackBar.value = Event(t.message.toString())
             }
         })
     }

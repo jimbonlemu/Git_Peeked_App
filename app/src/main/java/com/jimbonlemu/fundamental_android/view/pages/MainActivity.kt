@@ -2,11 +2,14 @@ package com.jimbonlemu.fundamental_android.view.pages
 
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.jimbonlemu.fundamental_android.data.response.UserItem
 import com.jimbonlemu.fundamental_android.databinding.ActivityMainBinding
 import com.jimbonlemu.fundamental_android.view.adapter.ListGithubUserAdapter
@@ -24,25 +27,51 @@ class MainActivity : AppCompatActivity() {
 
         setupRecyclerView()
 
-        mainViewModel.searchResult.observe(this) { listData ->
-            if (listData != null) {
-                setListGithubUserData(listData)
-            }
-        }
+        with(mainViewModel) {
 
-        mainViewModel.isLoading.observe(this) {
-            showLoader(it)
+            isError.observe(this@MainActivity){
+                binding.tvMainErrorText.text = it
+            }
+            spawnSnackBar.observe(this@MainActivity) {
+                it.getContentIfUnhandled()?.let { textOnSnackBar ->
+                    Snackbar.make(window.decorView.rootView, textOnSnackBar, Snackbar.LENGTH_SHORT).show()
+                }
+            }
+            searchResult.observe(this@MainActivity) { listData ->
+                if (listData != null) {
+                    setListGithubUserData(listData)
+                }
+            }
+
+            isLoading.observe(this@MainActivity) {
+                showLoader(it)
+            }
+            spawnSnackBar.observe(this@MainActivity) {
+                it.getContentIfUnhandled()?.let { snackBarText ->
+                    Snackbar.make(window.decorView.rootView, snackBarText, Snackbar.LENGTH_SHORT)
+                        .show()
+                }
+            }
         }
 
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
-            searchView.editText.setOnEditorActionListener { _, _, _ ->
-                searchBar.setText(searchView.text)
-                searchView.hide()
-                mainViewModel.searchGithubUser(searchView.text.toString())
-                false
+            searchView.editText.setOnEditorActionListener { _, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    val searchText = searchView.text.toString().trim()
+                    if (searchText.isNotEmpty()) {
+                        searchBar.setText(searchText)
+                        searchView.hide()
+                        mainViewModel.searchGithubUser(searchText)
+                    } else {
+                        Toast.makeText(this@MainActivity, "Please enter a search query", Toast.LENGTH_SHORT).show()
+                    }
+                    return@setOnEditorActionListener true
+                }
+                return@setOnEditorActionListener false
             }
         }
+
 
     }
 
@@ -72,6 +101,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 
 }

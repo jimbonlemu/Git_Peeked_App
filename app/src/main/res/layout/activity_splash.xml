@@ -6,4 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".view.pages.SplashActivity">
 
+    <ImageView
+        android:id="@+id/ivSplashScreen"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/app_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

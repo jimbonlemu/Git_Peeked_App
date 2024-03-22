@@ -23,12 +23,16 @@ class MainViewModel : ViewModel() {
     private val _spawnSnackBar = MutableLiveData<Event<String>>()
     val spawnSnackBar: LiveData<Event<String>> = _spawnSnackBar
 
+    private val _isError = MutableLiveData<String>()
+    val isError: LiveData<String> = _isError
+
 
     init {
         searchGithubUser()
     }
 
     fun searchGithubUser(username: String = "jimbonlemu") {
+        _isError.value = ""
         _isLoading.value = true
         val client = ApiConfig.connectApiService().searchGithubUser(username)
         client.enqueue(object : Callback<SearchResponse> {
@@ -39,14 +43,22 @@ class MainViewModel : ViewModel() {
                 _isLoading.value = false
                 if (response.isSuccessful) {
                     _searchResult.value = response.body()?.items
+
+                    _isError.value =
+                        if (searchResult.value!!.isEmpty()) "Can't found searched users" else ""
+
                 } else {
                     Log.e("MainViewModel", "onFailure: ${response.message()}")
+                    _spawnSnackBar.value = Event(response.message())
+                    _isError.value = "Unable to fetch data"
                 }
             }
 
             override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
                 _isLoading.value = false
                 Log.e("MainViewModel", "onFailure: ${t.message}")
+                _spawnSnackBar.value = Event(t.message.toString())
+                _isError.value = "Unable to fetch data"
             }
         })
     }

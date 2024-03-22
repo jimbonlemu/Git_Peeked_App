@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".view.pages.MainActivity">
 
+
     <com.google.android.material.search.SearchBar
         android:id="@+id/searchBar"
         android:layout_width="match_parent"
@@ -48,5 +49,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchBar"
         tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tvMainErrorText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

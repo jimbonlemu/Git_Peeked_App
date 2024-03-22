@@ -15,7 +15,6 @@ class SectionsPagerAdapter(
     var username: String = githubUsername
 
     override fun getItemCount(): Int = 2
-
     override fun createFragment(position: Int): Fragment {
         val fragment: Fragment = FollowFragment()
         fragment.arguments = Bundle().apply {

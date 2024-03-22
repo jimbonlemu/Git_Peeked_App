@@ -2,11 +2,13 @@ package com.jimbonlemu.fundamental_android.view.pages
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.jimbonlemu.fundamental_android.R
@@ -15,6 +17,7 @@ import com.jimbonlemu.fundamental_android.databinding.ActivityDetailBinding
 import com.jimbonlemu.fundamental_android.view.adapter.SectionsPagerAdapter
 import com.jimbonlemu.fundamental_android.view.view_model.DetailViewModel
 
+@Suppress("DEPRECATION")
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
@@ -26,18 +29,44 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setAppBar()
+
         val getExtra = intent.extras?.getString("username")
 
+        with(detailViewModel) {
+            getDataDetailUserGithub(getExtra)
 
-        detailViewModel.getDataDetailUserGithub(getExtra)
+            isLoading.observe(this@DetailActivity) {
+                setupLoading(it)
+            }
 
-        detailViewModel.isLoading.observe(this) {
-            setupLoading(it)
+            spawnSnackBar.observe(this@DetailActivity) {
+                it.getContentIfUnhandled()?.let { textOnSnackBar ->
+                    Snackbar.make(window.decorView.rootView, textOnSnackBar, Snackbar.LENGTH_SHORT).show()
+                }
+            }
+
+            userDataDetail.observe(this@DetailActivity) { value ->
+                setUserDataDetail(value)
+                initTabLayout(getExtra!!, value.following.toString(), value.followers.toString())
+            }
         }
+    }
 
-        detailViewModel.userDataDetail.observe(this) { value ->
-            setUserDataDetail(value)
-            initTabLayout(getExtra!!, value.following.toString(), value.followers.toString())
+    private fun setAppBar() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.icon_back)
+        supportActionBar?.title = "Detail User"
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
@@ -55,14 +84,16 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setUserDataDetail(data: DetailSearchResponse) {
         with(binding.layoutProfile) {
-            Glide.with(root.context).load(data.avatarUrl).into(civDetailUserImage)
-            tvDetailName.text = data.name ?: "-"
-            tvDetailUsername.text = data.login ?: "-"
-            tvDetailRepos.text = "${data.publicRepos ?: "-"}"
-            tvDetailCompanies.text = data.company ?: "-"
-            compTitleBio.append(" ${data.name ?: data.login} : ")
-            tvDetailBio.text = "${data.bio ?: "-"}"
-            tvDetailLocation.text = data.location ?: "-"
+            with(data) {
+                Glide.with(root.context).load(avatarUrl).into(civDetailUserImage)
+                tvDetailName.text = name ?: "-"
+                tvDetailUsername.text = login ?: "-"
+                tvDetailRepos.text = "${publicRepos ?: "-"}"
+                tvDetailCompanies.text = company ?: "-"
+                compTitleBio.append(" ${name ?: login} : ")
+                tvDetailBio.text = "${bio ?: "-"}"
+                tvDetailLocation.text = location ?: "-"
+            }
         }
 
     }
@@ -80,6 +111,7 @@ class DetailActivity : AppCompatActivity() {
             }
         }
     }
+
 
     companion object {
         private val TAB_TITLES = arrayOf(
