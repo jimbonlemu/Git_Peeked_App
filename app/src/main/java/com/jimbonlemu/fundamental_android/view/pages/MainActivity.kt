@@ -6,7 +6,6 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -64,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                         searchView.hide()
                         mainViewModel.searchGithubUser(searchText)
                     } else {
-                        Toast.makeText(this@MainActivity, "Please enter a search query", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MainActivity, "Please type the username to search", Toast.LENGTH_SHORT).show()
                     }
                     return@setOnEditorActionListener true
                 }

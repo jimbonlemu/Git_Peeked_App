@@ -29,7 +29,6 @@
         app:layout_constraintTop_toTopOf="@+id/civDetailUserImage"
         />
 
-
     <TextView
         android:id="@+id/tvDetailUsername"
         android:layout_width="0dp"
@@ -41,7 +40,6 @@
         app:layout_constraintStart_toStartOf="@+id/tvDetailName"
         app:layout_constraintTop_toBottomOf="@+id/tvDetailName"
         tools:text="@tools:sample/first_names" />
-
 
     <TextView
         android:id="@+id/comp_title_bio"
@@ -66,7 +64,6 @@
         app:layout_constraintTop_toBottomOf="@id/comp_title_bio"
         tools:text="@string/text_sample" />
 
-
     <ImageView
         android:id="@+id/icon_comp_location"
         android:layout_width="18dp"
@@ -89,7 +86,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/icon_comp_location"
         app:layout_constraintStart_toEndOf="@+id/icon_comp_location"
         app:layout_constraintTop_toTopOf="@+id/icon_comp_location" />
-
 
     <TextView
         android:id="@+id/tvDetailLocation"
@@ -126,7 +122,6 @@
         app:layout_constraintStart_toEndOf="@+id/icon_comp_companies"
         app:layout_constraintTop_toTopOf="@+id/icon_comp_companies" />
 
-
     <TextView
         android:id="@+id/tvDetailCompanies"
         android:layout_width="0dp"
@@ -161,7 +156,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/icon_comp_repos"
         app:layout_constraintStart_toEndOf="@+id/icon_comp_repos"
         app:layout_constraintTop_toTopOf="@+id/icon_comp_repos" />
-
 
     <TextView
         android:id="@+id/tvDetailRepos"

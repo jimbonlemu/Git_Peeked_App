@@ -25,7 +25,6 @@ class FollowingViewModel : ViewModel() {
     private val _isError = MutableLiveData<String>()
     val isError: LiveData<String> = _isError
 
-
     fun getFollowingGithubUser(username: String) {
         _isError.value = ""
         _isLoading.value = true

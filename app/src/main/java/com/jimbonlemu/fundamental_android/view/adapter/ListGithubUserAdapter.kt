@@ -12,7 +12,6 @@ import com.jimbonlemu.fundamental_android.data.response.UserItem
 import com.jimbonlemu.fundamental_android.databinding.UserWidgetBinding
 import com.jimbonlemu.fundamental_android.view.pages.DetailActivity
 
-
 class ListGithubUserAdapter :
     ListAdapter<UserItem, ListGithubUserAdapter.ListViewHolder>(DIFF_CALLBACK) {
 

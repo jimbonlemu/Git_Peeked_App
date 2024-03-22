@@ -26,7 +26,6 @@ class MainViewModel : ViewModel() {
     private val _isError = MutableLiveData<String>()
     val isError: LiveData<String> = _isError
 
-
     init {
         searchGithubUser()
     }

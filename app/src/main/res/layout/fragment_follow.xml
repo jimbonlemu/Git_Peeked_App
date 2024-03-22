@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".view.pages.FollowFragment">
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFollow"
         android:layout_width="match_parent"
