@@ -2,6 +2,7 @@ package com.jimbonlemu.fundamental_android.view.pages
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -14,6 +15,7 @@ import com.jimbonlemu.fundamental_android.view.view_model.MainViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val mainViewModel by viewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,11 +23,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupRecyclerView()
-
-        val mainViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
-        )[MainViewModel::class.java]
 
         mainViewModel.searchResult.observe(this) { listData ->
             if (listData != null) {
@@ -63,14 +60,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showLoader(isLoading: Boolean) {
-        if (isLoading) {
-            binding.mainShimmerLoader.startShimmer()
-            binding.mainShimmerLoader.visibility = View.VISIBLE
-            binding.rvGithubUser.visibility = View.INVISIBLE
-        } else {
-            binding.mainShimmerLoader.stopShimmer()
-            binding.mainShimmerLoader.visibility = View.GONE
-            binding.rvGithubUser.visibility = View.VISIBLE
+        with(binding) {
+            if (isLoading) {
+                mainShimmerLoader.root.startShimmer()
+                mainShimmerLoader.root.visibility = View.VISIBLE
+                rvGithubUser.visibility = View.INVISIBLE
+            } else {
+                mainShimmerLoader.root.stopShimmer()
+                mainShimmerLoader.root.visibility = View.GONE
+                rvGithubUser.visibility = View.VISIBLE
+            }
         }
     }
 

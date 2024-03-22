@@ -11,7 +11,6 @@
         android:layout_height="0dp">
 
         <include
-
             android:id="@+id/layoutProfile"
             layout="@layout/detail_profile_widget"
             app:layout_constraintEnd_toEndOf="parent"
@@ -25,43 +24,34 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:ignore="UselessLeaf">
-                <include layout="@layout/user_detail_profile_shimmer"/>
-            </LinearLayout>
+
+            <include layout="@layout/user_detail_profile_shimmer" />
 
         </com.facebook.shimmer.ShimmerFrameLayout>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/rounded_corner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layoutProfile"
-            app:tabTextColor="@android:color/white" />
+            app:tabIndicatorColor="@color/black"
+            app:tabSelectedTextColor="@color/black"
+            app:tabTextColor="@android:color/black" />
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/nested_scroll_view"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tabs">
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/view_pager"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </androidx.core.widget.NestedScrollView>
-
+            app:layout_constraintTop_toBottomOf="@id/tabs" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>

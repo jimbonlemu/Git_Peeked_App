@@ -29,7 +29,4 @@
         app:layout_constraintTop_toTopOf="@+id/civUserImage"
         tools:text="@tools:sample/full_names" />
 
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

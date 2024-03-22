@@ -5,17 +5,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.jimbonlemu.fundamental_android.data.api.ApiConfig
-import com.jimbonlemu.fundamental_android.data.response.SearchResponse
 import com.jimbonlemu.fundamental_android.data.response.UserItem
 import com.jimbonlemu.fundamental_android.utils.Event
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainViewModel : ViewModel() {
+class FollowersViewModel : ViewModel() {
 
-    private val _searchResult = MutableLiveData<List<UserItem>?>()
-    val searchResult: LiveData<List<UserItem>?> = _searchResult
+    private val _followersData = MutableLiveData<List<UserItem>?>()
+    val followersData: LiveData<List<UserItem>?> = _followersData
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -24,30 +23,27 @@ class MainViewModel : ViewModel() {
     val spawnSnackBar: LiveData<Event<String>> = _spawnSnackBar
 
 
-    init {
-        searchGithubUser()
-    }
-
-    fun searchGithubUser(username: String = "jimbonlemu") {
+    fun getFollowersGithubUser(username: String) {
         _isLoading.value = true
-        val client = ApiConfig.connectApiService().searchGithubUser(username)
-        client.enqueue(object : Callback<SearchResponse> {
+        val client = ApiConfig.connectApiService().getFollowers(username)
+        client.enqueue(object : Callback<List<UserItem>?> {
             override fun onResponse(
-                call: Call<SearchResponse>,
-                response: Response<SearchResponse>
+                call: Call<List<UserItem>?>,
+                response: Response<List<UserItem>?>
             ) {
                 _isLoading.value = false
                 if (response.isSuccessful) {
-                    _searchResult.value = response.body()?.items
+                    _followersData.value = response.body()
                 } else {
-                    Log.e("MainViewModel", "onFailure: ${response.message()}")
+                    Log.e("Followers View Model", "onFailure: ${response.message()}")
                 }
             }
 
-            override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
+            override fun onFailure(call: Call<List<UserItem>?>, t: Throwable) {
                 _isLoading.value = false
-                Log.e("MainViewModel", "onFailure: ${t.message}")
+                Log.e("DetailViewModel", "onFailure: ${t.message}")
             }
+
         })
     }
 }

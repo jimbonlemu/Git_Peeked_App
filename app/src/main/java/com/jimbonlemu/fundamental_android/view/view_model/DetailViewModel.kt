@@ -43,7 +43,6 @@ class DetailViewModel : ViewModel() {
                 _isLoading.value = false
                 Log.e("DetailViewModel", "onFailure: ${t.message}")
             }
-
         })
     }
 }

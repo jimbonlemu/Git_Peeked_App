@@ -18,14 +18,22 @@ class ListGithubUserAdapter :
 
     class ListViewHolder(val binding: UserWidgetBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(userItem: UserItem) {
-            Glide.with(binding.root).load(userItem.avatarUrl).into(binding.civUserImage)
-            binding.tvUserGithubName.text = userItem.login
+            with(binding) {
+                val args = Bundle()
+                args.putString("username", userItem.login)
 
-            val args = Bundle()
-            args.putString("username", userItem.login)
+                Glide.with(root).load(userItem.avatarUrl).into(civUserImage)
 
-            binding.root.setOnClickListener {
-                it.context.startActivity(Intent(it.context, DetailActivity::class.java).putExtras(args))
+                tvUserGithubName.text = userItem.login
+
+                root.setOnClickListener {
+                    it.context.startActivity(
+                        Intent(
+                            it.context,
+                            DetailActivity::class.java
+                        ).putExtras(args)
+                    )
+                }
             }
         }
 
