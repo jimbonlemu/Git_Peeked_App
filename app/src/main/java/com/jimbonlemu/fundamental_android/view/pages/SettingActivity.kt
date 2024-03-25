@@ -1,11 +1,8 @@
 package com.jimbonlemu.fundamental_android.view.pages
 
 import android.os.Bundle
-import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
-import com.jimbonlemu.fundamental_android.R
 import com.jimbonlemu.fundamental_android.databinding.ActivitySettingBinding
 import com.jimbonlemu.fundamental_android.utils.SettingPreference
 import com.jimbonlemu.fundamental_android.utils.dataStore

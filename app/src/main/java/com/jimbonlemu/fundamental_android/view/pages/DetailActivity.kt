@@ -3,7 +3,7 @@ package com.jimbonlemu.fundamental_android.view.pages
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
@@ -16,14 +16,11 @@ import com.jimbonlemu.fundamental_android.utils.SettingPreference
 import com.jimbonlemu.fundamental_android.utils.dataStore
 import com.jimbonlemu.fundamental_android.view.adapter.SectionsPagerAdapter
 import com.jimbonlemu.fundamental_android.view.view_model.DetailViewModel
-import com.jimbonlemu.fundamental_android.view.view_model.SettingViewModel
-import com.jimbonlemu.fundamental_android.view.view_model.SettingViewModelFactory
 
 class DetailActivity : AppBarActivity("Detail User Page") {
 
     private lateinit var binding: ActivityDetailBinding
     private val detailViewModel by viewModels<DetailViewModel>()
-    private lateinit var settingViewModel: SettingViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
@@ -95,17 +92,14 @@ class DetailActivity : AppBarActivity("Detail User Page") {
     }
 
     private fun setIconMode() {
-        settingViewModel = ViewModelProvider(
-            this,
-            SettingViewModelFactory(SettingPreference.getInstance(application.dataStore))
-        )[SettingViewModel::class.java]
-        settingViewModel.getThemeSetting().observe(this) { darkModeIsActive ->
-            with(binding.layoutProfile) {
-                iconCompLocation.setImageResource(if (darkModeIsActive) R.drawable.icon_location_dark_mode else R.drawable.icon_location)
-                iconCompCompanies.setImageResource(if (darkModeIsActive) R.drawable.icon_company_dark_mode else R.drawable.icon_company)
-                iconCompRepos.setImageResource(if (darkModeIsActive) R.drawable.icon_repo_dark_mode else R.drawable.icon_repo)
+        SettingPreference.getInstance(application.dataStore).getThemeSetting().asLiveData()
+            .observe(this) { darkModeIsActive ->
+                with(binding.layoutProfile) {
+                    iconCompLocation.setImageResource(if (darkModeIsActive) R.drawable.icon_location_dark_mode else R.drawable.icon_location)
+                    iconCompCompanies.setImageResource(if (darkModeIsActive) R.drawable.icon_company_dark_mode else R.drawable.icon_company)
+                    iconCompRepos.setImageResource(if (darkModeIsActive) R.drawable.icon_repo_dark_mode else R.drawable.icon_repo)
+                }
             }
-        }
     }
 
     companion object {

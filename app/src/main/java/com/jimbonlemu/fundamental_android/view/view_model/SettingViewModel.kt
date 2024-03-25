@@ -18,6 +18,4 @@ class SettingViewModel(private val pref:SettingPreference):ViewModel() {
             pref.saveThemeSetting(isDarkModeActive)
         }
     }
-
-
 }

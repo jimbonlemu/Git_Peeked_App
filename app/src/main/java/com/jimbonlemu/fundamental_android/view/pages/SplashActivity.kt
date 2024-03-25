@@ -8,13 +8,13 @@ import android.os.Handler
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import com.jimbonlemu.fundamental_android.R
 import com.jimbonlemu.fundamental_android.databinding.ActivitySplashBinding
 import com.jimbonlemu.fundamental_android.utils.SettingPreference
 import com.jimbonlemu.fundamental_android.utils.dataStore
 import com.jimbonlemu.fundamental_android.view.view_model.SettingViewModel
-import com.jimbonlemu.fundamental_android.view.view_model.SettingViewModelFactory
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.seconds
@@ -45,18 +45,10 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun initDarkMode() {
-        settingViewModel =
-            ViewModelProvider(
-                this,
-                SettingViewModelFactory(SettingPreference.getInstance(application.dataStore))
-            )[SettingViewModel::class.java]
-
-        with(settingViewModel) {
-            getThemeSetting().observe(this@SplashActivity) { darkModeActive ->
-                val setMode =
-                    if (darkModeActive) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
-                AppCompatDelegate.setDefaultNightMode(setMode)
-            }
+        SettingPreference.getInstance(application.dataStore).getThemeSetting().asLiveData().observe(this){ darkModeActive ->
+            val setMode =
+                if (darkModeActive) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+            AppCompatDelegate.setDefaultNightMode(setMode)
         }
     }
 
