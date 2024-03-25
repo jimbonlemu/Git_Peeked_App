@@ -27,7 +27,6 @@ class SettingPreference private constructor(private val dataStore: DataStore<Pre
         }
     }
 
-
     companion object {
         @Volatile
         private var INSTANCE: SettingPreference? = null
