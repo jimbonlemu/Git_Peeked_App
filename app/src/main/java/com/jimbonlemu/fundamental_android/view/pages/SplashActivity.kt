@@ -20,7 +20,6 @@ import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.seconds
 
 
-@Suppress("DEPRECATION")
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
@@ -51,8 +50,8 @@ class SplashActivity : AppCompatActivity() {
                 this,
                 SettingViewModelFactory(SettingPreference.getInstance(application.dataStore))
             )[SettingViewModel::class.java]
-        with(settingViewModel) {
 
+        with(settingViewModel) {
             getThemeSetting().observe(this@SplashActivity) { darkModeActive ->
                 val setMode =
                     if (darkModeActive) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
@@ -62,6 +61,6 @@ class SplashActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val SPLASH_SCREEN_DURATION = 2
+        const val SPLASH_SCREEN_DURATION = 3
     }
 }

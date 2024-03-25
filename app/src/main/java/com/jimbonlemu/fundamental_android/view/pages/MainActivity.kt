@@ -15,6 +15,7 @@ import com.jimbonlemu.fundamental_android.data.response.UserItem
 import com.jimbonlemu.fundamental_android.databinding.ActivityMainBinding
 import com.jimbonlemu.fundamental_android.view.adapter.ListGithubUserAdapter
 import com.jimbonlemu.fundamental_android.view.view_model.MainViewModel
+
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val mainViewModel by viewModels<MainViewModel>()
@@ -78,8 +79,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
-
     private fun setupAppBar() {
         binding.abToolbar.setOnMenuItemClickListener { itemClicked ->
             when (itemClicked.itemId) {
@@ -87,12 +86,14 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(this@MainActivity, SettingActivity::class.java))
                     true
                 }
-
+                R.id.menuToFavorite ->{
+                    startActivity(Intent(this@MainActivity, FavoriteActivity::class.java))
+                    true
+                }
                 else -> false
             }
         }
     }
-
 
     private fun setupRecyclerView() {
         val layoutManager = LinearLayoutManager(this)

@@ -1,10 +1,9 @@
 package com.jimbonlemu.fundamental_android.view.pages
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
@@ -13,22 +12,23 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.jimbonlemu.fundamental_android.R
 import com.jimbonlemu.fundamental_android.data.response.DetailSearchResponse
 import com.jimbonlemu.fundamental_android.databinding.ActivityDetailBinding
+import com.jimbonlemu.fundamental_android.utils.SettingPreference
+import com.jimbonlemu.fundamental_android.utils.dataStore
 import com.jimbonlemu.fundamental_android.view.adapter.SectionsPagerAdapter
 import com.jimbonlemu.fundamental_android.view.view_model.DetailViewModel
+import com.jimbonlemu.fundamental_android.view.view_model.SettingViewModel
+import com.jimbonlemu.fundamental_android.view.view_model.SettingViewModelFactory
 
-@Suppress("DEPRECATION")
-class DetailActivity : AppCompatActivity() {
+class DetailActivity : AppBarActivity("Detail User Page") {
 
     private lateinit var binding: ActivityDetailBinding
     private val detailViewModel by viewModels<DetailViewModel>()
-
+    private lateinit var settingViewModel: SettingViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        setAppBar()
-
+        setIconMode()
         val getExtra = intent.extras?.getString("username")
 
         with(detailViewModel) {
@@ -40,7 +40,8 @@ class DetailActivity : AppCompatActivity() {
 
             spawnSnackBar.observe(this@DetailActivity) {
                 it.getContentIfUnhandled()?.let { textOnSnackBar ->
-                    Snackbar.make(window.decorView.rootView, textOnSnackBar, Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(window.decorView.rootView, textOnSnackBar, Snackbar.LENGTH_SHORT)
+                        .show()
                 }
             }
 
@@ -48,23 +49,6 @@ class DetailActivity : AppCompatActivity() {
                 setUserDataDetail(value)
                 initTabLayout(getExtra!!, value.following.toString(), value.followers.toString())
             }
-        }
-    }
-
-    private fun setAppBar() {
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.icon_back)
-        supportActionBar?.title = "Detail User"
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                onBackPressed()
-                true
-            }
-
-            else -> super.onOptionsItemSelected(item)
         }
     }
 
@@ -110,6 +94,19 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    private fun setIconMode() {
+        settingViewModel = ViewModelProvider(
+            this,
+            SettingViewModelFactory(SettingPreference.getInstance(application.dataStore))
+        )[SettingViewModel::class.java]
+        settingViewModel.getThemeSetting().observe(this) { darkModeIsActive ->
+            with(binding.layoutProfile) {
+                iconCompLocation.setImageResource(if (darkModeIsActive) R.drawable.icon_location_dark_mode else R.drawable.icon_location)
+                iconCompCompanies.setImageResource(if (darkModeIsActive) R.drawable.icon_company_dark_mode else R.drawable.icon_company)
+                iconCompRepos.setImageResource(if (darkModeIsActive) R.drawable.icon_repo_dark_mode else R.drawable.icon_repo)
+            }
+        }
+    }
 
     companion object {
         private val TAB_TITLES = arrayOf(

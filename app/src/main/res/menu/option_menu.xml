@@ -5,9 +5,13 @@
     <group android:menuCategory="container">
 
         <item
-            android:icon="@drawable/icon_setting"
+            android:id="@+id/menuToFavorite"
+            android:title="@string/favorite"
+            app:showAsAction="never" />
+
+        <item
             android:id="@+id/menuToSetting"
             android:title="@string/setting"
-            app:showAsAction="ifRoom" />
+            app:showAsAction="never" />
     </group>
 </menu>
