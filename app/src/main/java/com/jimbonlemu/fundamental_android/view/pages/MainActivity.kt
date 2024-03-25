@@ -1,5 +1,6 @@
 package com.jimbonlemu.fundamental_android.view.pages
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -9,16 +10,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.jimbonlemu.fundamental_android.R
 import com.jimbonlemu.fundamental_android.data.response.UserItem
 import com.jimbonlemu.fundamental_android.databinding.ActivityMainBinding
 import com.jimbonlemu.fundamental_android.view.adapter.ListGithubUserAdapter
 import com.jimbonlemu.fundamental_android.view.view_model.MainViewModel
-
-
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val mainViewModel by viewModels<MainViewModel>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -28,12 +27,13 @@ class MainActivity : AppCompatActivity() {
 
         with(mainViewModel) {
 
-            isError.observe(this@MainActivity){
+            isError.observe(this@MainActivity) {
                 binding.tvMainErrorText.text = it
             }
             spawnSnackBar.observe(this@MainActivity) {
                 it.getContentIfUnhandled()?.let { textOnSnackBar ->
-                    Snackbar.make(window.decorView.rootView, textOnSnackBar, Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(window.decorView.rootView, textOnSnackBar, Snackbar.LENGTH_SHORT)
+                        .show()
                 }
             }
             searchResult.observe(this@MainActivity) { listData ->
@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        setupAppBar()
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
             searchView.editText.setOnEditorActionListener { _, actionId, _ ->
@@ -63,7 +64,11 @@ class MainActivity : AppCompatActivity() {
                         searchView.hide()
                         mainViewModel.searchGithubUser(searchText)
                     } else {
-                        Toast.makeText(this@MainActivity, "Please type the username to search", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Please type the username to search",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                     return@setOnEditorActionListener true
                 }
@@ -71,8 +76,23 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
     }
+
+
+
+    private fun setupAppBar() {
+        binding.abToolbar.setOnMenuItemClickListener { itemClicked ->
+            when (itemClicked.itemId) {
+                R.id.menuToSetting -> {
+                    startActivity(Intent(this@MainActivity, SettingActivity::class.java))
+                    true
+                }
+
+                else -> false
+            }
+        }
+    }
+
 
     private fun setupRecyclerView() {
         val layoutManager = LinearLayoutManager(this)
@@ -100,5 +120,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 }
