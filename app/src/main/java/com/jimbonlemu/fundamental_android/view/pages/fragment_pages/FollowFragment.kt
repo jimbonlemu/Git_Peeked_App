@@ -1,4 +1,4 @@
-package com.jimbonlemu.fundamental_android.view.pages
+package com.jimbonlemu.fundamental_android.view.pages.fragment_pages
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -31,6 +31,7 @@ class FollowFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         arguments?.let {
             _position = it.getInt(ARGS_TAB_POSITION)
             _username = it.getString(ARGS_GITHUB_USERNAME)
@@ -45,7 +46,6 @@ class FollowFragment : Fragment() {
         } else {
             setFollowersData(listUserAdapter)
         }
-
     }
 
     private fun initRecyclerView() {

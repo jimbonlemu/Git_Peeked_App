@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.jimbonlemu.fundamental_android.view.pages.FollowFragment
+import com.jimbonlemu.fundamental_android.view.pages.fragment_pages.FollowFragment
 
 class SectionsPagerAdapter(
     activity: AppCompatActivity,

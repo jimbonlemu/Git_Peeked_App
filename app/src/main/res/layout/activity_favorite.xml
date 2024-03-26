@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".view.pages.FavoriteActivity">
 
-
     <include
         android:id="@+id/favoritedShimmerLoader"
         layout="@layout/general_shimmer_layout" />
@@ -18,6 +17,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

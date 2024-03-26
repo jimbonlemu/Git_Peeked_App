@@ -2,6 +2,7 @@ package com.jimbonlemu.fundamental_android.view.pages
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.viewpager2.widget.ViewPager2
@@ -21,11 +22,15 @@ class DetailActivity : AppBarActivity("Detail User Page") {
 
     private lateinit var binding: ActivityDetailBinding
     private val detailViewModel by viewModels<DetailViewModel>()
+    private var isFavorite = false
+    private var isDarkModeActive = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setIconMode()
+
+        initDarkMode()
+
         val getExtra = intent.extras?.getString("username")
 
         with(detailViewModel) {
@@ -47,18 +52,23 @@ class DetailActivity : AppBarActivity("Detail User Page") {
                 initTabLayout(getExtra!!, value.following.toString(), value.followers.toString())
             }
         }
+
+        binding.layoutProfile.fabDetail.setOnClickListener {
+            isFavorite = !isFavorite
+            setFabMode(binding.layoutProfile.fabDetail)
+        }
+
     }
 
     private fun initTabLayout(username: String, following: String = "", follower: String = "") {
         val sectionsPagerAdapter = SectionsPagerAdapter(this, username)
-        val viewPager: ViewPager2 = findViewById(R.id.view_pager)
+        val viewPager: ViewPager2 = binding.viewPager
         viewPager.adapter = sectionsPagerAdapter
-        val tabs: TabLayout = findViewById(R.id.tabs)
+        val tabs: TabLayout = binding.tabs
         TabLayoutMediator(tabs, viewPager) { tab, position ->
             tab.text =
                 TAB_TITLES[position] + if (position == 0) "\n" + following else "\n" + follower
         }.attach()
-
     }
 
     private fun setUserDataDetail(data: DetailSearchResponse) {
@@ -80,6 +90,7 @@ class DetailActivity : AppBarActivity("Detail User Page") {
     private fun setupLoading(isLoading: Boolean) {
         with(binding) {
             if (isLoading) {
+                layoutProfile.fabDetail.visibility = View.INVISIBLE
                 detailProfileShimmerLoader.startShimmer()
                 detailProfileShimmerLoader.visibility = View.VISIBLE
                 layoutProfile.layoutProfileItem.visibility = View.INVISIBLE
@@ -87,19 +98,34 @@ class DetailActivity : AppBarActivity("Detail User Page") {
                 detailProfileShimmerLoader.stopShimmer()
                 detailProfileShimmerLoader.visibility = View.GONE
                 layoutProfile.layoutProfileItem.visibility = View.VISIBLE
+                layoutProfile.fabDetail.visibility = View.VISIBLE
             }
         }
     }
 
-    private fun setIconMode() {
+    private fun initDarkMode() {
         SettingPreference.getInstance(application.dataStore).getThemeSetting().asLiveData()
             .observe(this) { darkModeIsActive ->
-                with(binding.layoutProfile) {
-                    iconCompLocation.setImageResource(if (darkModeIsActive) R.drawable.icon_location_dark_mode else R.drawable.icon_location)
-                    iconCompCompanies.setImageResource(if (darkModeIsActive) R.drawable.icon_company_dark_mode else R.drawable.icon_company)
-                    iconCompRepos.setImageResource(if (darkModeIsActive) R.drawable.icon_repo_dark_mode else R.drawable.icon_repo)
-                }
+                isDarkModeActive = darkModeIsActive
+                setIconMode()
             }
+    }
+
+    private fun setIconMode() {
+        with(binding.layoutProfile) {
+            iconCompLocation.setImageResource(if (isDarkModeActive) R.drawable.icon_location_dark_mode else R.drawable.icon_location)
+            iconCompCompanies.setImageResource(if (isDarkModeActive) R.drawable.icon_company_dark_mode else R.drawable.icon_company)
+            iconCompRepos.setImageResource(if (isDarkModeActive) R.drawable.icon_repo_dark_mode else R.drawable.icon_repo)
+        }
+    }
+
+    private fun setFabMode(image: ImageView) {
+        val setResourceByMode = if (isFavorite) {
+            if (isDarkModeActive) R.drawable.icon_favorited_dark_mode else R.drawable.icon_favorited
+        } else {
+            if (isDarkModeActive) R.drawable.icon_unfavorited_dark_mode else R.drawable.icon_unfavorited
+        }
+        image.setImageResource(setResourceByMode)
     }
 
     companion object {
