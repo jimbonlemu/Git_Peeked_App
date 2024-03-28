@@ -2,6 +2,7 @@ package com.jimbonlemu.fundamental_android.view.pages
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.viewpager2.widget.ViewPager2
@@ -81,8 +82,10 @@ class DetailActivity : AppBarActivity("Detail User Page") {
                     )
                     if (isFavorite) {
                         deleteFavorite(entity)
+                        getToast("Success delete $getExtra from Favorite")
                     } else {
                         insertFavorite(entity)
+                        getToast("Success added $getExtra to Favorite")
                     }
                 }
             }
@@ -146,6 +149,10 @@ class DetailActivity : AppBarActivity("Detail User Page") {
             iconCompCompanies.setImageResource(if (isDarkModeActive) R.drawable.icon_company_dark_mode else R.drawable.icon_company)
             iconCompRepos.setImageResource(if (isDarkModeActive) R.drawable.icon_repo_dark_mode else R.drawable.icon_repo)
         }
+    }
+
+    private fun getToast(text:String){
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 
     companion object {

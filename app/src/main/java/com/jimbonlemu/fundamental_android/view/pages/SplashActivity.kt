@@ -20,7 +20,7 @@ import kotlin.time.Duration.Companion.seconds
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
@@ -42,10 +42,22 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun initDarkMode() {
-        SettingPreference.getInstance(application.dataStore).getThemeSetting().asLiveData().observe(this){ darkModeActive ->
-            val setMode =
-                if (darkModeActive) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
-            AppCompatDelegate.setDefaultNightMode(setMode)
+        SettingPreference.getInstance(application.dataStore).getThemeSetting().asLiveData()
+            .observe(this) { darkModeActive ->
+                val setMode =
+                    if (darkModeActive) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+                AppCompatDelegate.setDefaultNightMode(setMode)
+                setLogoMode(darkModeActive)
+            }
+    }
+
+    private fun setLogoMode(isDarkMode: Boolean) {
+        with(binding.ivSplashScreen) {
+            if (isDarkMode) {
+                setImageResource(R.drawable.app_logo_dark_mode)
+            } else {
+                setImageResource(R.drawable.app_logo)
+            }
         }
     }
 

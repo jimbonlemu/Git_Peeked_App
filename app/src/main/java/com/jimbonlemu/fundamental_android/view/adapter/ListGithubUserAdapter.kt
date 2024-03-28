@@ -35,7 +35,6 @@ class ListGithubUserAdapter :
                 }
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
