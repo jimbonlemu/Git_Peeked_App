@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.jimbonlemu.fundamental_android.R
-import com.jimbonlemu.fundamental_android.data.response.UserItem
+import com.jimbonlemu.fundamental_android.data.remote.response.UserItem
 import com.jimbonlemu.fundamental_android.databinding.ActivityMainBinding
 import com.jimbonlemu.fundamental_android.view.adapter.ListGithubUserAdapter
 import com.jimbonlemu.fundamental_android.view.view_model.MainViewModel

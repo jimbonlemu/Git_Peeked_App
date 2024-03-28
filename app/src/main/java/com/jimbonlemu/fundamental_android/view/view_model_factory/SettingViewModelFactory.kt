@@ -1,8 +1,9 @@
-package com.jimbonlemu.fundamental_android.view.view_model
+package com.jimbonlemu.fundamental_android.view.view_model_factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider.NewInstanceFactory
 import com.jimbonlemu.fundamental_android.utils.SettingPreference
+import com.jimbonlemu.fundamental_android.view.view_model.SettingViewModel
 
 @Suppress("UNCHECKED_CAST")
 class SettingViewModelFactory (private val pref:SettingPreference):NewInstanceFactory(){

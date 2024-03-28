@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.jimbonlemu.fundamental_android.data.response.UserItem
+import com.jimbonlemu.fundamental_android.data.remote.response.UserItem
 import com.jimbonlemu.fundamental_android.databinding.UserWidgetBinding
 import com.jimbonlemu.fundamental_android.view.pages.DetailActivity
 

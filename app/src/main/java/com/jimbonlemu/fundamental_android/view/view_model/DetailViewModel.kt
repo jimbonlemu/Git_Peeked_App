@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.jimbonlemu.fundamental_android.data.api.ApiConfig
-import com.jimbonlemu.fundamental_android.data.response.DetailSearchResponse
+import com.jimbonlemu.fundamental_android.data.remote.api.ApiConfig
+import com.jimbonlemu.fundamental_android.data.remote.response.DetailSearchResponse
 import com.jimbonlemu.fundamental_android.utils.Event
 import retrofit2.Call
 import retrofit2.Callback

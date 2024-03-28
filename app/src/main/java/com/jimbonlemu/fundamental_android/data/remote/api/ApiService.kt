@@ -1,8 +1,8 @@
-package com.jimbonlemu.fundamental_android.data.api
+package com.jimbonlemu.fundamental_android.data.remote.api
 
-import com.jimbonlemu.fundamental_android.data.response.DetailSearchResponse
-import com.jimbonlemu.fundamental_android.data.response.SearchResponse
-import com.jimbonlemu.fundamental_android.data.response.UserItem
+import com.jimbonlemu.fundamental_android.data.remote.response.DetailSearchResponse
+import com.jimbonlemu.fundamental_android.data.remote.response.SearchResponse
+import com.jimbonlemu.fundamental_android.data.remote.response.UserItem
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

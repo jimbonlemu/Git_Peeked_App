@@ -49,77 +49,92 @@ class FollowFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        val layoutManager = LinearLayoutManager(requireActivity())
-        binding?.rvFollow?.layoutManager = layoutManager
-        val itemDecoration = DividerItemDecoration(requireActivity(), layoutManager.orientation)
-        binding?.rvFollow?.addItemDecoration(itemDecoration)
+        with(binding?.rvFollow!!) {
+            val layoutManager = LinearLayoutManager(requireActivity())
+            this.layoutManager = layoutManager
+            val itemDecoration = DividerItemDecoration(requireActivity(), layoutManager.orientation)
+            addItemDecoration(itemDecoration)
+        }
     }
 
     private fun setFollowingData(adapter: ListGithubUserAdapter) {
         with(followingViewModel) {
-            if (followingData.value == null) {
-                getFollowingGithubUser(_username!!)
-            }
-
-            spawnSnackBar.observe(requireActivity()) {
-                it.getContentIfUnhandled()?.let { textOnSnackBar ->
-                    Snackbar.make(binding?.root?.rootView!!, textOnSnackBar, Snackbar.LENGTH_SHORT)
-                        .show()
+            with(binding!!) {
+                if (followingData.value == null) {
+                    getFollowingGithubUser(_username!!)
                 }
-            }
+                spawnSnackBar.observe(requireActivity()) {
+                    it.getContentIfUnhandled()?.let { textOnSnackBar ->
+                        Snackbar.make(
+                            root.rootView!!,
+                            textOnSnackBar,
+                            Snackbar.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                }
 
-            isError.observe(viewLifecycleOwner) {
-                binding?.tvFollowError?.text = it
-            }
+                isError.observe(viewLifecycleOwner) {
+                    tvFollowError.text = it
+                }
 
-            followingData.observe(viewLifecycleOwner) {
-                adapter.submitList(it)
-                binding?.rvFollow?.adapter = adapter
-            }
+                followingData.observe(viewLifecycleOwner) {
+                    adapter.submitList(it)
+                    rvFollow.adapter = adapter
+                }
 
-            isLoading.observe(viewLifecycleOwner) {
-                initLoader(it)
+                isLoading.observe(viewLifecycleOwner) {
+                    initLoader(it)
+                }
             }
         }
     }
 
     private fun setFollowersData(adapter: ListGithubUserAdapter) {
         with(followersViewModel) {
-            if (followersData.value == null) {
-                getFollowersGithubUser(_username!!)
-            }
-
-            isError.observe(viewLifecycleOwner) {
-                binding?.tvFollowError?.text = it
-            }
-
-            spawnSnackBar.observe(requireActivity()) {
-                it.getContentIfUnhandled()?.let { textOnSnackBar ->
-                    Snackbar.make(binding?.root?.rootView!!, textOnSnackBar, Snackbar.LENGTH_SHORT)
-                        .show()
+            with(binding!!) {
+                if (followersData.value == null) {
+                    getFollowersGithubUser(_username!!)
                 }
-            }
 
-            followersData.observe(viewLifecycleOwner) {
-                adapter.submitList(it)
-                binding?.rvFollow?.adapter = adapter
-            }
+                isError.observe(viewLifecycleOwner) {
+                    tvFollowError.text = it
+                }
 
-            isLoading.observe(viewLifecycleOwner) {
-                initLoader(it)
+                spawnSnackBar.observe(requireActivity()) {
+                    it.getContentIfUnhandled()?.let { textOnSnackBar ->
+                        Snackbar.make(
+                            root.rootView!!,
+                            textOnSnackBar,
+                            Snackbar.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                }
+
+                followersData.observe(viewLifecycleOwner) {
+                    adapter.submitList(it)
+                    rvFollow.adapter = adapter
+                }
+
+                isLoading.observe(viewLifecycleOwner) {
+                    initLoader(it)
+                }
             }
         }
     }
 
     private fun initLoader(isLoading: Boolean) {
-        if (isLoading) {
-            binding?.loaderRvFollow?.root?.startShimmer()
-            binding?.loaderRvFollow?.root?.visibility = View.VISIBLE
-            binding?.rvFollow?.visibility = View.INVISIBLE
-        } else {
-            binding?.loaderRvFollow?.root?.stopShimmer()
-            binding?.loaderRvFollow?.root?.visibility = View.GONE
-            binding?.rvFollow?.visibility = View.VISIBLE
+        with(binding!!) {
+            if (isLoading) {
+                loaderRvFollow.root.startShimmer()
+                loaderRvFollow.root.visibility = View.VISIBLE
+                rvFollow.visibility = View.INVISIBLE
+            } else {
+                loaderRvFollow.root.stopShimmer()
+                loaderRvFollow.root.visibility = View.GONE
+                rvFollow.visibility = View.VISIBLE
+            }
         }
     }
 

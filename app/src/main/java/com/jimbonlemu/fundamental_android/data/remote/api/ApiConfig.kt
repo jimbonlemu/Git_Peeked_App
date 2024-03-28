@@ -1,4 +1,4 @@
-package com.jimbonlemu.fundamental_android.data.api
+package com.jimbonlemu.fundamental_android.data.remote.api
 
 import com.jimbonlemu.fundamental_android.BuildConfig
 import okhttp3.Interceptor

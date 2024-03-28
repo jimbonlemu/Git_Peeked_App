@@ -7,7 +7,7 @@ import com.jimbonlemu.fundamental_android.databinding.ActivitySettingBinding
 import com.jimbonlemu.fundamental_android.utils.SettingPreference
 import com.jimbonlemu.fundamental_android.utils.dataStore
 import com.jimbonlemu.fundamental_android.view.view_model.SettingViewModel
-import com.jimbonlemu.fundamental_android.view.view_model.SettingViewModelFactory
+import com.jimbonlemu.fundamental_android.view.view_model_factory.SettingViewModelFactory
 
 
 class SettingActivity :AppBarActivity("Setting Page") {

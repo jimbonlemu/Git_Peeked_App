@@ -11,17 +11,21 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.jimbonlemu.fundamental_android.R
-import com.jimbonlemu.fundamental_android.data.response.DetailSearchResponse
+import com.jimbonlemu.fundamental_android.data.remote.response.DetailSearchResponse
 import com.jimbonlemu.fundamental_android.databinding.ActivityDetailBinding
 import com.jimbonlemu.fundamental_android.utils.SettingPreference
 import com.jimbonlemu.fundamental_android.utils.dataStore
 import com.jimbonlemu.fundamental_android.view.adapter.SectionsPagerAdapter
 import com.jimbonlemu.fundamental_android.view.view_model.DetailViewModel
+import com.jimbonlemu.fundamental_android.view.view_model.FavoriteViewModel
+import com.jimbonlemu.fundamental_android.view.view_model_factory.FavoriteViewModelFactory
 
 class DetailActivity : AppBarActivity("Detail User Page") {
 
     private lateinit var binding: ActivityDetailBinding
     private val detailViewModel by viewModels<DetailViewModel>()
+    private val favViewModel: FavoriteViewModel by viewModels<FavoriteViewModel>()
+
     private var isFavorite = false
     private var isDarkModeActive = false
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +34,12 @@ class DetailActivity : AppBarActivity("Detail User Page") {
         setContentView(binding.root)
 
         initDarkMode()
+
+        val favViewModelFactory = FavoriteViewModelFactory.getInstance(this)
+        val favVewModel: FavoriteViewModel by viewModels {
+            favViewModelFactory
+        }
+
 
         val getExtra = intent.extras?.getString("username")
 
