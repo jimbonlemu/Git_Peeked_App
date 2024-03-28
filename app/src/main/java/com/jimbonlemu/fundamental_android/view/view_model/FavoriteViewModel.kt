@@ -9,9 +9,11 @@ import kotlinx.coroutines.launch
 class FavoriteViewModel(private val favoriteRepository: FavoriteRepository) : ViewModel() {
     fun getListAllFavorite() = favoriteRepository.getAllFavorite()
 
+    fun checkStatusFavorite(username:String) = favoriteRepository.checkStatusFavorite(username)
+
     fun insertFavorite(favoriteEntity: FavoriteEntity){
         viewModelScope.launch {
-            favoriteRepository.removeFavorite(favoriteEntity)
+            favoriteRepository.insertFavorite(favoriteEntity)
         }
     }
 

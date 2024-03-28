@@ -10,6 +10,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class FavoriteEntity (
     @PrimaryKey(autoGenerate = false)
-    val userName: String,
+    val username: String,
     val userImage: String? = null
 ):Parcelable

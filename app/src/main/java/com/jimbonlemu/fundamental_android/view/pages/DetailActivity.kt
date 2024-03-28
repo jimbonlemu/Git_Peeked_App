@@ -11,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.jimbonlemu.fundamental_android.R
+import com.jimbonlemu.fundamental_android.data.local.entity.FavoriteEntity
 import com.jimbonlemu.fundamental_android.data.remote.response.DetailSearchResponse
 import com.jimbonlemu.fundamental_android.databinding.ActivityDetailBinding
 import com.jimbonlemu.fundamental_android.utils.SettingPreference
@@ -24,9 +25,7 @@ class DetailActivity : AppBarActivity("Detail User Page") {
 
     private lateinit var binding: ActivityDetailBinding
     private val detailViewModel by viewModels<DetailViewModel>()
-    private val favViewModel: FavoriteViewModel by viewModels<FavoriteViewModel>()
-
-    private var isFavorite = false
+    private var detailSearchResponse = DetailSearchResponse()
     private var isDarkModeActive = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,10 +35,11 @@ class DetailActivity : AppBarActivity("Detail User Page") {
         initDarkMode()
 
         val favViewModelFactory = FavoriteViewModelFactory.getInstance(this)
-        val favVewModel: FavoriteViewModel by viewModels {
+        val favViewModel: FavoriteViewModel by viewModels {
             favViewModelFactory
         }
 
+        var isFavorite = false
 
         val getExtra = intent.extras?.getString("username")
 
@@ -60,12 +60,29 @@ class DetailActivity : AppBarActivity("Detail User Page") {
             userDataDetail.observe(this@DetailActivity) { value ->
                 setUserDataDetail(value)
                 initTabLayout(getExtra!!, value.following.toString(), value.followers.toString())
+                detailSearchResponse = value
+            }
+        }
+
+        favViewModel.checkStatusFavorite(getExtra ?: "").observe(this) { fav ->
+            isFavorite = fav != null
+            if (isFavorite) {
+                binding.layoutProfile.fabDetail.setImageResource(R.drawable.icon_favorited)
+            } else {
+                binding.layoutProfile.fabDetail.setImageResource(R.drawable.icon_unfavorited)
             }
         }
 
         binding.layoutProfile.fabDetail.setOnClickListener {
-            isFavorite = !isFavorite
-            setFabMode(binding.layoutProfile.fabDetail)
+            val entity = FavoriteEntity(
+                username = detailSearchResponse.login ?: "-",
+                userImage = detailSearchResponse.avatarUrl
+            )
+            if (isFavorite) {
+                favViewModel.deleteFavorite(entity)
+            } else {
+                favViewModel.insertFavorite(entity)
+            }
         }
 
     }
@@ -129,14 +146,14 @@ class DetailActivity : AppBarActivity("Detail User Page") {
         }
     }
 
-    private fun setFabMode(image: ImageView) {
-        val setResourceByMode = if (isFavorite) {
-            if (isDarkModeActive) R.drawable.icon_favorited_dark_mode else R.drawable.icon_favorited
-        } else {
-            if (isDarkModeActive) R.drawable.icon_unfavorited_dark_mode else R.drawable.icon_unfavorited
-        }
-        image.setImageResource(setResourceByMode)
-    }
+//    private fun setFabMode(image: ImageView) {
+//        val setResourceByMode = if (isFavorite) {
+//            if (isDarkModeActive) R.drawable.icon_favorited_dark_mode else R.drawable.icon_favorited
+//        } else {
+//            if (isDarkModeActive) R.drawable.icon_unfavorited_dark_mode else R.drawable.icon_unfavorited
+//        }
+//        image.setImageResource(setResourceByMode)
+//    }
 
     companion object {
         private val TAB_TITLES = arrayOf(
