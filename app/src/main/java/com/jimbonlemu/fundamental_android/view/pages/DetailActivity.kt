@@ -2,7 +2,6 @@ package com.jimbonlemu.fundamental_android.view.pages
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.viewpager2.widget.ViewPager2
@@ -64,27 +63,30 @@ class DetailActivity : AppBarActivity("Detail User Page") {
             }
         }
 
-        favViewModel.checkStatusFavorite(getExtra ?: "").observe(this) { fav ->
-            isFavorite = fav != null
-            if (isFavorite) {
-                binding.layoutProfile.fabDetail.setImageResource(R.drawable.icon_favorited)
-            } else {
-                binding.layoutProfile.fabDetail.setImageResource(R.drawable.icon_unfavorited)
+        with(favViewModel) {
+            with(binding.layoutProfile) {
+                checkStatusFavorite(getExtra ?: "").observe(this@DetailActivity) { fav ->
+                    isFavorite = fav != null
+                    if (isFavorite) {
+                        fabDetail.setImageResource(R.drawable.icon_favorited)
+                    } else {
+                        fabDetail.setImageResource(R.drawable.icon_unfavorited)
+                    }
+                }
+
+                fabDetail.setOnClickListener {
+                    val entity = FavoriteEntity(
+                        username = detailSearchResponse.login ?: "-",
+                        userImage = detailSearchResponse.avatarUrl
+                    )
+                    if (isFavorite) {
+                        deleteFavorite(entity)
+                    } else {
+                        insertFavorite(entity)
+                    }
+                }
             }
         }
-
-        binding.layoutProfile.fabDetail.setOnClickListener {
-            val entity = FavoriteEntity(
-                username = detailSearchResponse.login ?: "-",
-                userImage = detailSearchResponse.avatarUrl
-            )
-            if (isFavorite) {
-                favViewModel.deleteFavorite(entity)
-            } else {
-                favViewModel.insertFavorite(entity)
-            }
-        }
-
     }
 
     private fun initTabLayout(username: String, following: String = "", follower: String = "") {
@@ -145,15 +147,6 @@ class DetailActivity : AppBarActivity("Detail User Page") {
             iconCompRepos.setImageResource(if (isDarkModeActive) R.drawable.icon_repo_dark_mode else R.drawable.icon_repo)
         }
     }
-
-//    private fun setFabMode(image: ImageView) {
-//        val setResourceByMode = if (isFavorite) {
-//            if (isDarkModeActive) R.drawable.icon_favorited_dark_mode else R.drawable.icon_favorited
-//        } else {
-//            if (isDarkModeActive) R.drawable.icon_unfavorited_dark_mode else R.drawable.icon_unfavorited
-//        }
-//        image.setImageResource(setResourceByMode)
-//    }
 
     companion object {
         private val TAB_TITLES = arrayOf(

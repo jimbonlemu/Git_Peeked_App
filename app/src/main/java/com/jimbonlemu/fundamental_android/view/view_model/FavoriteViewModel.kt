@@ -22,5 +22,4 @@ class FavoriteViewModel(private val favoriteRepository: FavoriteRepository) : Vi
             favoriteRepository.removeFavorite(favoriteEntity)
         }
     }
-
 }

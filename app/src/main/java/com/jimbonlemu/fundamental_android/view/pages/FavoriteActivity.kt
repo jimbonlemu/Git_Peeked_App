@@ -1,6 +1,7 @@
 package com.jimbonlemu.fundamental_android.view.pages
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,12 +27,16 @@ class FavoriteActivity : AppBarActivity("Favorites Page") {
         }
 
         favViewModel.getListAllFavorite().observe(this){value ->
+            if (value.isNullOrEmpty()){
+                Toast.makeText(this, "You don\'t favorite any users at all", Toast.LENGTH_SHORT).show()
+            }else{
             val listFavorites = arrayListOf<UserItem>()
-            value.map {data ->
-                val item = UserItem(login = data.username, avatarUrl = data.userImage)
-                listFavorites.add(item)
+                value.map { data ->
+                    val item = UserItem(login = data.username, avatarUrl = data.userImage)
+                    listFavorites.add(item)
+                }
+                setupAdapter(listFavorites)
             }
-           setupAdapter(listFavorites)
         }
     }
 
