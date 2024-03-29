@@ -13,8 +13,8 @@ android {
         applicationId = "com.jimbonlemu.fundamental_android"
         minSdk = 24
         targetSdk = 34
-        versionCode = 30
-        versionName = "1.9"
+        versionCode = 31
+        versionName = "2.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -78,12 +78,8 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
 
 //    Testing Library
-    testImplementation("org.mockito:mockito-inline:4.4.0")
     testImplementation("junit:junit:4.13.2")
-    testImplementation("org.mockito:mockito-core:4.4.0")
-    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("androidx.arch.core:core-testing:2.1.0")
 }
