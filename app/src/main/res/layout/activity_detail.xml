@@ -18,8 +18,8 @@
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/detailProfileShimmerLoader"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -37,10 +37,7 @@
         android:background="@drawable/rounded_corner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutProfile"
-        app:tabIndicatorColor="@color/black"
-        app:tabSelectedTextColor="@color/black"
-        app:tabTextColor="@android:color/black" />
+        app:layout_constraintTop_toBottomOf="@id/layoutProfile" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"

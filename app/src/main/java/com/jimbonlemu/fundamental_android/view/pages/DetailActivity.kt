@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.asLiveData
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
@@ -122,16 +123,14 @@ class DetailActivity : AppBarActivity("Detail User Page") {
     private fun setupLoading(isLoading: Boolean) {
         with(binding) {
             if (isLoading) {
-                layoutProfile.fabDetail.visibility = View.INVISIBLE
                 detailProfileShimmerLoader.startShimmer()
-                detailProfileShimmerLoader.visibility = View.VISIBLE
-                layoutProfile.layoutProfileItem.visibility = View.INVISIBLE
+
             } else {
                 detailProfileShimmerLoader.stopShimmer()
-                detailProfileShimmerLoader.visibility = View.GONE
-                layoutProfile.layoutProfileItem.visibility = View.VISIBLE
-                layoutProfile.fabDetail.visibility = View.VISIBLE
             }
+            detailProfileShimmerLoader.visibility = if (isLoading) View.VISIBLE else View.GONE
+            layoutProfile.layoutProfileItem.visibility = if (isLoading) View.INVISIBLE else View.VISIBLE
+            layoutProfile.fabDetail.visibility = if (isLoading) View.INVISIBLE else View.VISIBLE
         }
     }
 
@@ -140,18 +139,36 @@ class DetailActivity : AppBarActivity("Detail User Page") {
             .observe(this) { darkModeIsActive ->
                 isDarkModeActive = darkModeIsActive
                 setIconMode()
+                setTabLayoutBackground()
             }
     }
 
+    private fun setTabLayoutBackground() {
+        val selectedColor = if (isDarkModeActive) R.color.white else R.color.black
+        val unselectedColor = if (isDarkModeActive) R.color.white else R.color.black
+        val drawableResId =
+            if (isDarkModeActive) R.drawable.rounded_corner_dark_mode else R.drawable.rounded_corner
+
+        binding.tabs.apply {
+            setSelectedTabIndicatorColor(ContextCompat.getColor(this@DetailActivity, selectedColor))
+            setTabTextColors(
+                ContextCompat.getColor(this@DetailActivity, selectedColor),
+                ContextCompat.getColor(this@DetailActivity, unselectedColor)
+            )
+            background = ContextCompat.getDrawable(this@DetailActivity, drawableResId)
+        }
+    }
+
     private fun setIconMode() {
-        with(binding.layoutProfile) {
+        binding.layoutProfile.apply {
             iconCompLocation.setImageResource(if (isDarkModeActive) R.drawable.icon_location_dark_mode else R.drawable.icon_location)
             iconCompCompanies.setImageResource(if (isDarkModeActive) R.drawable.icon_company_dark_mode else R.drawable.icon_company)
             iconCompRepos.setImageResource(if (isDarkModeActive) R.drawable.icon_repo_dark_mode else R.drawable.icon_repo)
         }
+
     }
 
-    private fun getToast(text:String){
+    private fun getToast(text: String) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 

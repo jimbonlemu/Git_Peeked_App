@@ -29,6 +29,7 @@ open class AppBarActivity(private val appBarTitle: String) : AppCompatActivity()
         with(supportActionBar!!) {
             setDisplayHomeAsUpEnabled(true)
             title = appBarTitle
+            elevation = 0f
         }
         setIconMode()
     }
