@@ -15,11 +15,23 @@ import com.jimbonlemu.fundamental_android.view.pages.DetailActivity
 class ListGithubUserAdapter :
     ListAdapter<UserItem, ListGithubUserAdapter.ListViewHolder>(DIFF_CALLBACK) {
 
+    companion object {
+        const val USERNAME_KEY = "username"
+
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<UserItem>() {
+            override fun areItemsTheSame(oldItem: UserItem, newItem: UserItem): Boolean =
+                oldItem == newItem
+
+            override fun areContentsTheSame(oldItem: UserItem, newItem: UserItem): Boolean =
+                oldItem == newItem
+        }
+    }
+
     class ListViewHolder(private val binding: UserWidgetBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(userItem: UserItem) {
             with(binding) {
                 val args = Bundle()
-                args.putString("username", userItem.login)
+                args.putString(USERNAME_KEY, userItem.login)
 
                 Glide.with(root).load(userItem.avatarUrl).into(civUserImage)
 
@@ -50,15 +62,5 @@ class ListGithubUserAdapter :
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val gitUser = getItem(position)
         holder.bind(gitUser)
-    }
-
-    companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<UserItem>() {
-            override fun areItemsTheSame(oldItem: UserItem, newItem: UserItem): Boolean =
-                oldItem == newItem
-
-            override fun areContentsTheSame(oldItem: UserItem, newItem: UserItem): Boolean =
-                oldItem == newItem
-        }
     }
 }
