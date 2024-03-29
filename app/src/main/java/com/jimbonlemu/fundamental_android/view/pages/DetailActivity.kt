@@ -123,14 +123,16 @@ class DetailActivity : AppBarActivity("Detail User Page") {
     private fun setupLoading(isLoading: Boolean) {
         with(binding) {
             if (isLoading) {
+                detailProfileShimmerLoader.visibility = View.VISIBLE
                 detailProfileShimmerLoader.startShimmer()
-
+                layoutProfile.layoutProfileItem.visibility = View.INVISIBLE
+                layoutProfile.fabDetail.visibility = View.INVISIBLE
             } else {
                 detailProfileShimmerLoader.stopShimmer()
+                detailProfileShimmerLoader.visibility = View.GONE
+                layoutProfile.layoutProfileItem.visibility = View.VISIBLE
+                layoutProfile.fabDetail.visibility = View.VISIBLE
             }
-            detailProfileShimmerLoader.visibility = if (isLoading) View.VISIBLE else View.GONE
-            layoutProfile.layoutProfileItem.visibility = if (isLoading) View.INVISIBLE else View.VISIBLE
-            layoutProfile.fabDetail.visibility = if (isLoading) View.INVISIBLE else View.VISIBLE
         }
     }
 
@@ -149,7 +151,7 @@ class DetailActivity : AppBarActivity("Detail User Page") {
         val drawableResId =
             if (isDarkModeActive) R.drawable.rounded_corner_dark_mode else R.drawable.rounded_corner
 
-        binding.tabs.apply {
+        with(binding.tabs) {
             setSelectedTabIndicatorColor(ContextCompat.getColor(this@DetailActivity, selectedColor))
             setTabTextColors(
                 ContextCompat.getColor(this@DetailActivity, selectedColor),
@@ -160,7 +162,7 @@ class DetailActivity : AppBarActivity("Detail User Page") {
     }
 
     private fun setIconMode() {
-        binding.layoutProfile.apply {
+        with(binding.layoutProfile) {
             iconCompLocation.setImageResource(if (isDarkModeActive) R.drawable.icon_location_dark_mode else R.drawable.icon_location)
             iconCompCompanies.setImageResource(if (isDarkModeActive) R.drawable.icon_company_dark_mode else R.drawable.icon_company)
             iconCompRepos.setImageResource(if (isDarkModeActive) R.drawable.icon_repo_dark_mode else R.drawable.icon_repo)
