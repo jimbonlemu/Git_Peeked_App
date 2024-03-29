@@ -10,4 +10,5 @@
     <string name="setting">Setting</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="favorite">Favorite</string>
+    <string name="splash_iv_content_desc">Selamat datang pengguna, di Aplikasi Git Peeked!. Mohon bersabar kami sedang memuat aplikasi</string>
 </resources>
