@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         setupRecyclerView()
 
         with(mainViewModel) {
-
             isError.observe(this@MainActivity) {
                 binding.tvMainErrorText.text = it
             }

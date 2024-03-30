@@ -13,7 +13,6 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "se
 
 class SettingPreference private constructor(private val dataStore: DataStore<Preferences>) {
     companion object {
-
         private val THEME_KEY = booleanPreferencesKey("theme_setting")
 
         @Volatile

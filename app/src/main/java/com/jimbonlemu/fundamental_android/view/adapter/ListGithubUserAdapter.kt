@@ -27,7 +27,7 @@ class ListGithubUserAdapter :
         }
     }
 
-    class ListViewHolder(private val binding: UserWidgetBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ListViewHolder(private val binding: UserWidgetBinding) : RecyclerView .ViewHolder(binding.root) {
         fun bind(userItem: UserItem) {
             with(binding) {
                 val args = Bundle()

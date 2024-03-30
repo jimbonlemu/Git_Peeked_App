@@ -23,7 +23,6 @@ class DetailViewModel : ViewModel() {
     val spawnSnackBar: LiveData<Event<String>> = _spawnSnackBar
 
     fun getDataDetailUserGithub(username: String? = null) {
-
         _isLoading.value = true
         val client = ApiConfig.connectApiService().getDetailGithubUser(username!!)
         client.enqueue(object : Callback<DetailSearchResponse> {
