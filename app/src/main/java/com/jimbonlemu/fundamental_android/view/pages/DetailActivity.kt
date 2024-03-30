@@ -69,7 +69,7 @@ class DetailActivity : AppBarActivity("Detail User Page") {
             with(binding.layoutProfile) {
                 checkStatusFavorite(getExtra ?: "").observe(this@DetailActivity) { fav ->
                     isFavorite = fav != null
-                        if (isFavorite) {
+                    if (isFavorite) {
                         fabDetail.setImageResource(R.drawable.icon_favorited)
                     } else {
                         fabDetail.setImageResource(R.drawable.icon_unfavorited)
