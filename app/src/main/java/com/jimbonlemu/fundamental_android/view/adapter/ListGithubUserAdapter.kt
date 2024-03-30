@@ -14,7 +14,6 @@ import com.jimbonlemu.fundamental_android.view.pages.DetailActivity
 
 class ListGithubUserAdapter :
     ListAdapter<UserItem, ListGithubUserAdapter.ListViewHolder>(DIFF_CALLBACK) {
-
     companion object {
         const val USERNAME_KEY = "username"
 
@@ -26,7 +25,6 @@ class ListGithubUserAdapter :
                 oldItem == newItem
         }
     }
-
     class ListViewHolder(private val binding: UserWidgetBinding) : RecyclerView .ViewHolder(binding.root) {
         fun bind(userItem: UserItem) {
             with(binding) {
@@ -48,7 +46,6 @@ class ListGithubUserAdapter :
             }
         }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         return ListViewHolder(
             UserWidgetBinding.inflate(
@@ -58,7 +55,6 @@ class ListGithubUserAdapter :
             )
         )
     }
-
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val gitUser = getItem(position)
         holder.bind(gitUser)
