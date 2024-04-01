@@ -31,15 +31,23 @@ class FavoriteActivity : AppBarActivity("Favorites Page") {
         favViewModel.getListAllFavorite().observe(this) { value ->
             setupAdapter(value)
             if (value.isNullOrEmpty()) {
-                Toast.makeText(this, "You don\'t favorite any users at all", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "You don\'t favorite any users at all", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 
     }
 
     private fun initRecyclerView() {
-        binding.rvFavorite.layoutManager = LinearLayoutManager(this)
-        binding.rvFavorite.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+        binding.rvFavorite.apply {
+            layoutManager = LinearLayoutManager(this@FavoriteActivity)
+            addItemDecoration(
+                DividerItemDecoration(
+                    this@FavoriteActivity,
+                    LinearLayoutManager.VERTICAL
+                )
+            )
+        }
     }
 
     private fun setupAdapter(listFavorites: List<FavoriteEntity>) {
