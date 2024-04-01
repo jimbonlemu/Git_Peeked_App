@@ -20,9 +20,6 @@ class MainViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    private val _spawnSnackBar = MutableLiveData<Event<String>>()
-    val spawnSnackBar: LiveData<Event<String>> = _spawnSnackBar
-
     private val _isError = MutableLiveData<String>()
     val isError: LiveData<String> = _isError
 
@@ -48,7 +45,6 @@ class MainViewModel : ViewModel() {
 
                 } else {
                     Log.e("MainViewModel", "onFailure: ${response.message()}")
-                    _spawnSnackBar.value = Event(response.message())
                     _isError.value = "Unable to fetch data"
                 }
             }
@@ -56,7 +52,6 @@ class MainViewModel : ViewModel() {
             override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
                 _isLoading.value = false
                 Log.e("MainViewModel", "onFailure: ${t.message}")
-                _spawnSnackBar.value = Event(t.message.toString())
                 _isError.value = "Unable to fetch data"
             }
         })

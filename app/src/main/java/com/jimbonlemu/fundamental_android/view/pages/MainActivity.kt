@@ -30,12 +30,7 @@ class MainActivity : AppCompatActivity() {
             isError.observe(this@MainActivity) {
                 binding.tvMainErrorText.text = it
             }
-            spawnSnackBar.observe(this@MainActivity) {
-                it.getContentIfUnhandled()?.let { textOnSnackBar ->
-                    Snackbar.make(window.decorView.rootView, textOnSnackBar, Snackbar.LENGTH_SHORT)
-                        .show()
-                }
-            }
+
             searchResult.observe(this@MainActivity) { listData ->
                 if (listData != null) {
                     setListGithubUserData(listData)
@@ -45,12 +40,7 @@ class MainActivity : AppCompatActivity() {
             isLoading.observe(this@MainActivity) {
                 showLoader(it)
             }
-            spawnSnackBar.observe(this@MainActivity) {
-                it.getContentIfUnhandled()?.let { snackBarText ->
-                    Snackbar.make(window.decorView.rootView, snackBarText, Snackbar.LENGTH_SHORT)
-                        .show()
-                }
-            }
+
         }
 
         setupAppBar()

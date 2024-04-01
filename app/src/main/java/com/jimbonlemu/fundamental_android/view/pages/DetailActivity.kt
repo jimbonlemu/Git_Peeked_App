@@ -51,13 +51,6 @@ class DetailActivity : AppBarActivity("Detail User Page") {
                 setupLoading(it)
             }
 
-            spawnSnackBar.observe(this@DetailActivity) {
-                it.getContentIfUnhandled()?.let { textOnSnackBar ->
-                    Snackbar.make(window.decorView.rootView, textOnSnackBar, Snackbar.LENGTH_SHORT)
-                        .show()
-                }
-            }
-
             userDataDetail.observe(this@DetailActivity) { value ->
                 setUserDataDetail(value)
                 initTabLayout(getExtra!!, value.following.toString(), value.followers.toString())

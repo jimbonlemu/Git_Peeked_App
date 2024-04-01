@@ -63,16 +63,6 @@ class FollowFragment : Fragment() {
                 if (followingData.value == null) {
                     getFollowingGithubUser(_username!!)
                 }
-                spawnSnackBar.observe(requireActivity()) {
-                    it.getContentIfUnhandled()?.let { textOnSnackBar ->
-                        Snackbar.make(
-                            root.rootView!!,
-                            textOnSnackBar,
-                            Snackbar.LENGTH_SHORT
-                        )
-                            .show()
-                    }
-                }
 
                 isError.observe(viewLifecycleOwner) {
                     tvFollowError.text = it
@@ -99,17 +89,6 @@ class FollowFragment : Fragment() {
 
                 isError.observe(viewLifecycleOwner) {
                     tvFollowError.text = it
-                }
-
-                spawnSnackBar.observe(requireActivity()) {
-                    it.getContentIfUnhandled()?.let { textOnSnackBar ->
-                        Snackbar.make(
-                            root.rootView!!,
-                            textOnSnackBar,
-                            Snackbar.LENGTH_SHORT
-                        )
-                            .show()
-                    }
                 }
 
                 followersData.observe(viewLifecycleOwner) {

@@ -19,9 +19,6 @@ class FollowersViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    private val _spawnSnackBar = MutableLiveData<Event<String>>()
-    val spawnSnackBar: LiveData<Event<String>> = _spawnSnackBar
-
     private val _isError = MutableLiveData<String>()
     val isError: LiveData<String> = _isError
 
@@ -41,7 +38,6 @@ class FollowersViewModel : ViewModel() {
                         if (_followersData.value!!.isEmpty() || _followersData.value!!.equals(0)) "This user has no Followers" else ""
                 } else {
                     Log.e("Followers View Model", "onFailure: ${response.message()}")
-                    _spawnSnackBar.value = Event(response.message())
                     _isError.value = "Unable to fetch Followers data"
                 }
             }
@@ -49,7 +45,6 @@ class FollowersViewModel : ViewModel() {
             override fun onFailure(call: Call<List<UserItem>?>, t: Throwable) {
                 _isLoading.value = false
                 Log.e("DetailViewModel", "onFailure: ${t.message}")
-                _spawnSnackBar.value = Event(t.message.toString())
             }
 
         })

@@ -19,9 +19,6 @@ class DetailViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    private val _spawnSnackBar = MutableLiveData<Event<String>>()
-    val spawnSnackBar: LiveData<Event<String>> = _spawnSnackBar
-
     fun getDataDetailUserGithub(username: String? = null) {
         _isLoading.value = true
         val client = ApiConfig.connectApiService().getDetailGithubUser(username!!)
@@ -35,7 +32,6 @@ class DetailViewModel : ViewModel() {
                     _userDataDetail.value = response.body()
                 } else {
                     Log.e("DetailViewModel", "onFailure: ${response.message()}")
-                    _spawnSnackBar.value = Event(response.message())
 
                 }
             }
@@ -43,7 +39,6 @@ class DetailViewModel : ViewModel() {
             override fun onFailure(call: Call<DetailSearchResponse>, t: Throwable) {
                 _isLoading.value = false
                 Log.e("DetailViewModel", "onFailure: ${t.message}")
-                _spawnSnackBar.value = Event(t.message.toString())
             }
         })
     }
