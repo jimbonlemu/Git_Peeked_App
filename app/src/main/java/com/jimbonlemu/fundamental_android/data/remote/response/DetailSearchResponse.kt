@@ -13,9 +13,6 @@ data class DetailSearchResponse(
 	@field:SerializedName("company")
 	val company: String? = null,
 
-	@field:SerializedName("id")
-	val id: Int? = null,
-
 	@field:SerializedName("public_repos")
 	val publicRepos: Int? = null,
 
