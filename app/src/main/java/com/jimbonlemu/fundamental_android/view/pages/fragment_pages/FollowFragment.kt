@@ -48,7 +48,7 @@ class FollowFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        with(binding?.rvFollow!!) {
+     binding?.rvFollow?.apply {
             val layoutManager = LinearLayoutManager(requireActivity())
             this.layoutManager = layoutManager
             val itemDecoration = DividerItemDecoration(requireActivity(), layoutManager.orientation)
@@ -58,7 +58,7 @@ class FollowFragment : Fragment() {
 
     private fun setFollowingData(adapter: ListGithubUserAdapter) {
         with(followingViewModel) {
-            with(binding!!) {
+            binding?.apply {
                 if (followingData.value == null) {
                     getFollowingGithubUser(_username!!)
                 }
@@ -81,7 +81,7 @@ class FollowFragment : Fragment() {
 
     private fun setFollowersData(adapter: ListGithubUserAdapter) {
         with(followersViewModel) {
-            with(binding!!) {
+            binding?.apply {
                 if (followersData.value == null) {
                     getFollowersGithubUser(_username!!)
                 }
@@ -103,7 +103,7 @@ class FollowFragment : Fragment() {
     }
 
     private fun initLoader(isLoading: Boolean) {
-        with(binding!!) {
+        binding?.apply {
             if (isLoading) {
                 loaderRvFollow.root.startShimmer()
                 loaderRvFollow.root.visibility = View.VISIBLE
