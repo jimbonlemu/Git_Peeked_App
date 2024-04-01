@@ -18,40 +18,40 @@ import kotlin.time.Duration.Companion.seconds
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
-    private lateinit var binding: ActivitySplashBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySplashBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        ActivitySplashBinding.inflate(layoutInflater).apply {
+            setContentView(root)
+            initDarkMode()
 
-        initDarkMode()
-
-        binding.ivSplashScreen.startAnimation(
-            AnimationUtils.loadAnimation(
-                this@SplashActivity, R.anim.anim_fade_in_to_out
+            ivSplashScreen.startAnimation(
+                AnimationUtils.loadAnimation(
+                    this@SplashActivity, R.anim.anim_fade_in_to_out
+                )
             )
-        )
 
-        lifecycleScope.launch {
-            delay(SPLASH_SCREEN_DURATION.seconds)
-            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-            finish()
+            lifecycleScope.launch {
+                delay(SPLASH_SCREEN_DURATION.seconds)
+                startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+                finish()
+            }
         }
+
     }
 
     private fun initDarkMode() {
+        val binding = ActivitySplashBinding.inflate(layoutInflater)
         SettingPreference.getInstance(application.dataStore).getThemeSetting().asLiveData()
             .observe(this) { darkModeActive ->
                 val setMode =
                     if (darkModeActive) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
                 AppCompatDelegate.setDefaultNightMode(setMode)
-                setLogoMode(darkModeActive)
+                binding.setLogoMode(darkModeActive)
             }
     }
 
-    private fun setLogoMode(isDarkMode: Boolean) {
-        with(binding.ivSplashScreen) {
+    private fun ActivitySplashBinding.setLogoMode(isDarkMode: Boolean) {
+        with(ivSplashScreen) {
             if (isDarkMode) {
                 setImageResource(R.drawable.app_logo_dark_mode)
             } else {
