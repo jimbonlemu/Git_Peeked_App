@@ -40,13 +40,12 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun initDarkMode() {
-        val binding = ActivitySplashBinding.inflate(layoutInflater)
         SettingPreference.getInstance(application.dataStore).getThemeSetting().asLiveData()
             .observe(this) { darkModeActive ->
                 val setMode =
                     if (darkModeActive) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
                 AppCompatDelegate.setDefaultNightMode(setMode)
-                binding.setLogoMode(darkModeActive)
+                ActivitySplashBinding.inflate(layoutInflater).setLogoMode(darkModeActive)
             }
     }
 
