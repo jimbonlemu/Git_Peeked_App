@@ -17,13 +17,13 @@ class ApiConfig {
             val chainInterceptorForAuthToken = Interceptor { chain ->
                 chain.proceed(
                     chain.request().newBuilder()
-                        .addHeader("Authorization", BuildConfig.AUTH_TOKEN)
                         .build()
                 )
             }
 
-            val clientAndInterceptorBuilder = OkHttpClient.Builder().addInterceptor(loggingInterceptor)
-                .addInterceptor(loggingInterceptor).addInterceptor(chainInterceptorForAuthToken).build()
+            val clientAndInterceptorBuilder = OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor).addInterceptor(chainInterceptorForAuthToken)
+                .build()
 
             val createAndBuildConnectionToClient =
                 Retrofit.Builder().baseUrl(BuildConfig.BASE_URL)
