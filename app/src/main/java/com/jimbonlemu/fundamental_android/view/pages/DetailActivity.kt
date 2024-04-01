@@ -11,10 +11,10 @@ import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.jimbonlemu.fundamental_android.R
+import com.jimbonlemu.git_peeked.R
 import com.jimbonlemu.fundamental_android.data.local.entity.FavoriteEntity
 import com.jimbonlemu.fundamental_android.data.remote.response.DetailSearchResponse
-import com.jimbonlemu.fundamental_android.databinding.ActivityDetailBinding
+import com.jimbonlemu.git_peeked.databinding.ActivityDetailBinding
 import com.jimbonlemu.fundamental_android.utils.SettingPreference
 import com.jimbonlemu.fundamental_android.utils.dataStore
 import com.jimbonlemu.fundamental_android.view.adapter.SectionsPagerAdapter

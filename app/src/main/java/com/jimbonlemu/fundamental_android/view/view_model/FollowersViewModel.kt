@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.jimbonlemu.fundamental_android.data.remote.api.ApiConfig
 import com.jimbonlemu.fundamental_android.data.remote.response.UserItem
-import com.jimbonlemu.fundamental_android.utils.Event
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -7,10 +7,11 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jimbonlemu.fundamental_android.data.local.entity.FavoriteEntity
 import com.jimbonlemu.fundamental_android.data.remote.response.UserItem
-import com.jimbonlemu.fundamental_android.databinding.ActivityFavoriteBinding
+import com.jimbonlemu.git_peeked.databinding.ActivityFavoriteBinding
 import com.jimbonlemu.fundamental_android.view.adapter.ListGithubUserAdapter
 import com.jimbonlemu.fundamental_android.view.view_model.FavoriteViewModel
 import com.jimbonlemu.fundamental_android.view.view_model_factory.FavoriteViewModelFactory
+
 class FavoriteActivity : AppBarActivity("Favorites Page") {
 
     private lateinit var binding: ActivityFavoriteBinding

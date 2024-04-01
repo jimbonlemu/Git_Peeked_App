@@ -8,11 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
-import com.jimbonlemu.fundamental_android.databinding.FragmentFollowBinding
 import com.jimbonlemu.fundamental_android.view.adapter.ListGithubUserAdapter
 import com.jimbonlemu.fundamental_android.view.view_model.FollowersViewModel
 import com.jimbonlemu.fundamental_android.view.view_model.FollowingViewModel
+import com.jimbonlemu.git_peeked.databinding.FragmentFollowBinding
 
 class FollowFragment : Fragment() {
     private var _position: Int? = null

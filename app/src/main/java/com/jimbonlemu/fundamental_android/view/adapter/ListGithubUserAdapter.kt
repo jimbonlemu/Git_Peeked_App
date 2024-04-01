@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.jimbonlemu.fundamental_android.data.remote.response.UserItem
-import com.jimbonlemu.fundamental_android.databinding.UserWidgetBinding
 import com.jimbonlemu.fundamental_android.view.pages.DetailActivity
+import com.jimbonlemu.git_peeked.BuildConfig
+import com.jimbonlemu.git_peeked.databinding.UserWidgetBinding
 
 class ListGithubUserAdapter :
     ListAdapter<UserItem, ListGithubUserAdapter.ListViewHolder>(DIFF_CALLBACK) {

@@ -8,8 +8,8 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
-import com.jimbonlemu.fundamental_android.R
-import com.jimbonlemu.fundamental_android.databinding.ActivitySplashBinding
+import com.jimbonlemu.git_peeked.R
+import com.jimbonlemu.git_peeked.databinding.ActivitySplashBinding
 import com.jimbonlemu.fundamental_android.utils.SettingPreference
 import com.jimbonlemu.fundamental_android.utils.dataStore
 import kotlinx.coroutines.launch
@@ -18,24 +18,25 @@ import kotlin.time.Duration.Companion.seconds
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ActivitySplashBinding.inflate(layoutInflater).apply {
-            setContentView(root)
-            initDarkMode()
+        binding = ActivitySplashBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        initDarkMode()
 
-            ivSplashScreen.startAnimation(
-                AnimationUtils.loadAnimation(
-                    this@SplashActivity, R.anim.anim_fade_in_to_out
-                )
+        binding.ivSplashScreen.startAnimation(
+            AnimationUtils.loadAnimation(
+                this@SplashActivity, R.anim.anim_fade_in_to_out
             )
+        )
 
-            lifecycleScope.launch {
-                delay(SPLASH_SCREEN_DURATION.seconds)
-                startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-                finish()
-            }
+        lifecycleScope.launch {
+            delay(SPLASH_SCREEN_DURATION.seconds)
+            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            finish()
         }
+
 
     }
 
@@ -45,12 +46,12 @@ class SplashActivity : AppCompatActivity() {
                 val setMode =
                     if (darkModeActive) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
                 AppCompatDelegate.setDefaultNightMode(setMode)
-                ActivitySplashBinding.inflate(layoutInflater).setLogoMode(darkModeActive)
+                setLogoMode(darkModeActive)
             }
     }
 
-    private fun ActivitySplashBinding.setLogoMode(isDarkMode: Boolean) {
-        with(ivSplashScreen) {
+    private fun setLogoMode(isDarkMode: Boolean) {
+        with(binding.ivSplashScreen) {
             if (isDarkMode) {
                 setImageResource(R.drawable.app_logo_dark_mode)
             } else {

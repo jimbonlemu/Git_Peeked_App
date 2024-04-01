@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,29 +10,26 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Fundamental_Android"
+        android:theme="@style/Theme.Git_Peeked"
         tools:targetApi="31">
         <activity
-            android:name=".view.pages.AppBarActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.pages.SettingActivity"
+            android:name="com.jimbonlemu.fundamental_android.view.pages.SettingActivity"
             android:theme="@style/Theme.Material3.DayNight"
             android:exported="false" />
         <activity
-            android:name=".view.pages.FavoriteActivity"
+            android:name="com.jimbonlemu.fundamental_android.view.pages.FavoriteActivity"
             android:theme="@style/Theme.Material3.DayNight"
             android:exported="false" />
         <activity
-            android:name=".view.pages.MainActivity"
+            android:name="com.jimbonlemu.fundamental_android.view.pages.MainActivity"
             android:exported="false"
             android:theme="@style/Theme.Material3.DayNight.NoActionBar" />
         <activity
-            android:name=".view.pages.DetailActivity"
+            android:name="com.jimbonlemu.fundamental_android.view.pages.DetailActivity"
             android:exported="false"
             android:theme="@style/Theme.Material3.DayNight" />
         <activity
-            android:name=".view.pages.SplashActivity"
+            android:name="com.jimbonlemu.fundamental_android.view.pages.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
