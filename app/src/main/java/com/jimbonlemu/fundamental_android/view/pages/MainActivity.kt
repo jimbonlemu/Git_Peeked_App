@@ -74,20 +74,24 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(this@MainActivity, SettingActivity::class.java))
                     true
                 }
-                R.id.menuToFavorite ->{
+
+                R.id.menuToFavorite -> {
                     startActivity(Intent(this@MainActivity, FavoriteActivity::class.java))
                     true
                 }
+
                 else -> false
             }
         }
     }
 
     private fun setupRecyclerView() {
-        val layoutManager = LinearLayoutManager(this)
-        binding.rvGithubUser.layoutManager = layoutManager
-        val itemDecor = DividerItemDecoration(this, layoutManager.orientation)
-        binding.rvGithubUser.addItemDecoration(itemDecor)
+        binding.rvGithubUser.apply {
+            val layoutManager = LinearLayoutManager(this@MainActivity)
+            this.layoutManager = layoutManager
+            val itemDecor = DividerItemDecoration(this@MainActivity, layoutManager.orientation)
+            addItemDecoration(itemDecor)
+        }
     }
 
     private fun setListGithubUserData(users: List<UserItem>) {

@@ -9,7 +9,6 @@ import com.jimbonlemu.fundamental_android.utils.dataStore
 import com.jimbonlemu.fundamental_android.view.view_model.SettingViewModel
 import com.jimbonlemu.fundamental_android.view.view_model_factory.SettingViewModelFactory
 
-
 class SettingActivity : AppBarActivity("Setting Page") {
     private lateinit var settingViewModel: SettingViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
