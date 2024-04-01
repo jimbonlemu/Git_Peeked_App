@@ -13,12 +13,13 @@ android {
     defaultConfig {
         applicationId = "com.jimbonlemu.git_peeked"
         minSdk = 24
-        targetSdk = 33
-        versionCode = 1
+        //noinspection ExpiredTargetSdkVersion
+        targetSdk = 31
+        versionCode = 32
         versionName = "2.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-       
+        
     }
 
     buildFeatures{
