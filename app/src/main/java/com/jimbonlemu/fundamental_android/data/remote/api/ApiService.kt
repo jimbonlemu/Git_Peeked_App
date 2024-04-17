@@ -11,24 +11,28 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
+    companion object {
+        const val API_HEADER = "Authorization: token ${BuildConfig.AUTH_TOKEN}"
+    }
+
     @GET("/search/users")
-    @Headers("Authorization: token ${BuildConfig.AUTH_TOKEN}")
+    @Headers(API_HEADER)
     fun searchGithubUser(
         @Query("q") username: String
     ): Call<SearchResponse>
 
     @GET("/users/{username}")
-    @Headers("Authorization: token ${BuildConfig.AUTH_TOKEN}")
+    @Headers(API_HEADER)
     fun getDetailGithubUser(
         @Path("username") username: String
     ): Call<DetailSearchResponse>
 
     @GET("/users/{username}/followers")
-    @Headers("Authorization: token ${BuildConfig.AUTH_TOKEN}")
+    @Headers(API_HEADER)
     fun getFollowers(@Path("username") username: String): Call<List<UserItem>>
 
     @GET("/users/{username}/following")
-    @Headers("Authorization: token ${BuildConfig.AUTH_TOKEN}")
+    @Headers(API_HEADER)
     fun getFollowing(@Path("username") username: String): Call<List<UserItem>>
 
 }
